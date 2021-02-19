@@ -1,2 +1,1 @@
-# open-source-discord-music-bot
-## Cooming soon
+# Munari-Akairo
