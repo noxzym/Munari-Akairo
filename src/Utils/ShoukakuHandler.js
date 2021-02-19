@@ -31,7 +31,7 @@ module.exports = class ShoukakuHandler {
     };
     async pause(message) {
         message.guild.queue.player.setPaused(true);
-        message.guild.queueta.playing = false;
+        message.guild.queue.playing = false;
     };
     async resume(message) {
         message.guild.queue.player.setPaused(false);
@@ -70,7 +70,7 @@ module.exports = class ShoukakuHandler {
             };
         } else if (option === undefined) {
             const load = await node.rest.resolve(query, "youtube");
-            if (!load || load.tracks.length === 0) load = await node.rest.resolve(query, "youtubemusic");
+            if (!load) load = await node.rest.resolve(query, "youtubemusic");
             return load
         } else {
             const load = await node.rest.resolve(query, option);

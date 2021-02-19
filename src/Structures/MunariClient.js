@@ -6,7 +6,7 @@ require("../Extenders/Guild");
 
 const { AkairoClient, CommandHandler, ListenerHandler } = require("discord-akairo");
 const { Api } = require('@top-gg/sdk')
-const PlayerHandler = require('../Utils/Playerhandler');
+const PlayerHandler = require('../Utils/PlayerHandler');
 const UtilHandler = require('../Utils/UtilHandler');
 const ShoukakuHandler = require("../Utils/ShoukakuHandler");
 const path = require("path");
@@ -41,7 +41,7 @@ module.exports = class MunariClient extends AkairoClient {
             }
         );
         this.commandHandler = new CommandHandler(this, {
-            prefix: "m",
+            prefix: "m!",
             allowMention: true,
             blockClient: true,
             blockBots: true,

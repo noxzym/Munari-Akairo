@@ -4,7 +4,7 @@ const { createEmbed } = require("../../Utils/CreateEmbed");
 module.exports = class RepeatCommand extends Command {
     constructor() {
         super("RepeatCommand", {
-            aliases: ["repeat"],
+            aliases: ["repeat", "loop"],
             category: "\`🎶\`| Music",
             description: {
                 content: "Repeating the music queue",
