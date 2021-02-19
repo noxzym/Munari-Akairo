@@ -1,0 +1,134 @@
+{
+    "data": [
+        {
+            "date": "19 February 2021",
+            "content": [
+                "- Using shoukaku for music service",
+                "- Using akairo framework"
+            ]
+        },
+        {
+            "date": "13 Februaty 2021",
+            "content": [
+                "- Feat: Image Support Emoji"
+            ]
+        },
+        {
+            "date": "11 February 2021",
+            "content": [
+                "- Fix: Typo in music service, Snipe Command, and more"
+            ]
+        },
+        {
+            "date": "07 February 2021",
+            "content": [
+                "- Fix: Bug leaving voice channel",
+                "- Feat: Canvas Spotify",
+                "- Fix: Bug Platlist",
+                "- Feat: Pagination",
+                "- Refactor: Music Service"
+            ]
+        },
+        {
+            "date": "03 February 2021",
+            "content": [
+                "- Fix: Play command",
+                "- Update: Action Command",
+                "- Feat: Instagram Private API"
+            ]
+        },
+        {
+            "date": "29 January 2021",
+            "content": [
+                "- New fakesay command",
+                "- Add some feature",
+                "- Update Module"
+            ]
+        },
+        {
+            "date": "27 January 2021",
+            "content": [
+                "- Update bot version to V6.2.0",
+                "- Update Package",
+                "- Upgrade Moderation Command",
+                "- Add Respectcommand",
+                "- Add blocked mention"
+            ]
+        },
+        {
+            "date": "22 January 2021",
+            "content": [
+                "- Filter video data",
+                "- Fix bug in shoob timer",
+                "- Delete old style of help command"
+            ]
+        },
+        {
+            "date": "21 January 2021",
+            "content": [
+                "- Support Spotify Playlist",
+                "- Fix bug double executing command"
+            ]
+        },
+        {
+            "date": "18 January 2021",
+            "content": [
+                "- Add feature play track from spotify",
+                "- Optimizing Music Service",
+                "- Fix some bug in help command"
+            ]
+        },
+        {
+            "date": "13 January 2021",
+            "content": [
+                "- Refactor Command",
+                "- Optimizing Command",
+                "- Bug Fixed"
+            ]
+        },
+        {
+            "date": "11 January 2021",
+            "content": [
+                "- Update pagination",
+                "- New Feature in anime command",
+                "- Using default fonts for instagram and spotify",
+                "- Inline reply support"
+            ]
+        },
+        {
+            "date": "9 January 2021",
+            "content": [
+                "- Support execute command by edited message",
+                "- Add changelog command to see latest update"
+            ]
+        },
+        {
+            "date": "8 Januari 2021",
+            "content": [
+                "- Fix emoji command",
+                "- Fix error in shufflecommand"
+            ]
+        },
+        {
+            "date": "7 January 2021",
+            "content": [
+                "- Update listenmoecommand",
+                "- Fix unsupported fonts",
+                "- Add canvas service in Instagramcommand, you can add '--nocanvas' to display without canvas"
+            ]
+        },
+        {
+            "date": "5 January 2021",
+            "content": [
+                "- Change structure of Instagramcommand",
+                "- Reactivate Instagramcommand"
+            ]
+        },
+        {
+            "date": "1 January 2021",
+            "content": [
+                "- Happy new year!"
+            ]
+        }
+    ]
+}
