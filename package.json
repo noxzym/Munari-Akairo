@@ -11,6 +11,9 @@
     "type": "git",
     "url": "https://github.com/BlazeDexX/MunariHeroku.git"
   },
+  "engines": {
+    "node": "14.40.0"
+  },
   "keywords": [
     "munari-akairo"
   ],
