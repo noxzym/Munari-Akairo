@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo");
 const { MessageAttachment } = require("discord.js");
-const { createEmbed } = require("../../utils/createEmbed")
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const fetch = require("node-fetch");
 
 module.exports = class BullyCommand extends Command {

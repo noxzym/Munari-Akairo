@@ -1,14 +1,14 @@
 
 require('dotenv').config();
-require('../extenders/InlineReply');
-require('../extenders/GuildMember');
-require("../extenders/Guild");
+require('../Extenders/InlineReply');
+require('../Extenders/GuildMember');
+require("../Extenders/Guild");
 
 const { AkairoClient, CommandHandler, ListenerHandler } = require("discord-akairo");
 const { Api } = require('@top-gg/sdk')
-const PlayerHandler = require('../utils/Playerhandler');
-const UtilHandler = require('../utils/UtilHandler');
-const ShoukakuHandler = require("../utils/ShoukakuHandler");
+const PlayerHandler = require('../Utils/Playerhandler');
+const UtilHandler = require('../Utils/UtilHandler');
+const ShoukakuHandler = require("../Utils/ShoukakuHandler");
 const path = require("path");
 
 module.exports = class MunariClient extends AkairoClient {

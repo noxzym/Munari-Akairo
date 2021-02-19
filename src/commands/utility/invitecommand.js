@@ -1,5 +1,5 @@
 const { Command } = require("discord-akairo");
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 
 module.exports = class InviteCommand extends Command {
     constructor() {

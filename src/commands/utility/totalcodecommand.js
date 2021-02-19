@@ -1,7 +1,7 @@
 const { Command } = require("discord-akairo");
 const glob = require("glob");
 const { readFileSync } = require("fs");
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 
 module.exports = class TotalcodeCommand extends Command {
     constructor() {

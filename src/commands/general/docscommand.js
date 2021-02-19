@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo");
 const fetch = require('node-fetch');
-const { createEmbed } = require("../../utils/CreateEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 
 module.exports = class DocsCommand extends Command {
     constructor() {

@@ -1,7 +1,7 @@
 const { Command } = require("discord-akairo");
 const { MessageAttachment } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const colorThief = require("colorthief")
 const onecolor = require('onecolor');
 const convert = require('parse-ms');

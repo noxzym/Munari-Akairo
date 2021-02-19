@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo");
 const { Util } = require('discord.js');
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const moment = require('moment');
 moment.locale()
 

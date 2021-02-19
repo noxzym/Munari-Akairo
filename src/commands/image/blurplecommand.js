@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo");
 const { Util, MessageAttachment } = require('discord.js');
-const { createEmbed } = require("../../utils/createEmbed")
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const superagent = require("superagent");
 
 module.exports = class BlurpleCommand extends Command {

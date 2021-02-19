@@ -1,6 +1,6 @@
 const { Command } = require("discord-akairo");
 const { version } = require("discord.js");
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const os = require('os');
 const cpuStat = require("cpu-stat");
 const formatMs = require("pretty-ms");

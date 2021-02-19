@@ -1,7 +1,7 @@
 const { Command } = require("discord-akairo");
 const { MessageAttachment } = require("discord.js");
 const fetch = require("node-fetch");
-const { createEmbed } = require("../../utils/createEmbed");
+const { createEmbed } = require("../../Utils/CreateEmbed")
 
 module.exports = class PokeCommand extends Command {
     constructor() {

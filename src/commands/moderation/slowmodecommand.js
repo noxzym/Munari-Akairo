@@ -1,5 +1,5 @@
 const { Command } = require("discord-akairo");
-const { createEmbed } = require("../../utils/createEmbed")
+const { createEmbed } = require("../../Utils/CreateEmbed")
 const ms = require('ms');
 
 module.exports = class SlowmodeCommand extends Command {

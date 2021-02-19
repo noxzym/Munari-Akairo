@@ -1,7 +1,7 @@
 const { LavasfyClient } = require("lavasfy");
 const { Shoukaku } = require('shoukaku');
 const { getPreview } = require('spotify-url-info');
-const { createEmbed } = require("./createEmbed");
+const { createEmbed } = require("./CreateEmbed");
 
 const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
