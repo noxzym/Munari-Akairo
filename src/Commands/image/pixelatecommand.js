@@ -7,7 +7,7 @@ module.exports = class PixelateCommand extends Command {
     constructor() {
         super("PixelateCommand", {
             aliases: ["pixelate", "pixel"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Change image to pixelate",
                 usage: "pixelate [user/image/^]"

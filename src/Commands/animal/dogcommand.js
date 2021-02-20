@@ -7,7 +7,7 @@ module.exports = class DogCommand extends Command {
     constructor() {
         super("DogCommand", {
             aliases: ["dog"],
-            category: "\`🐶\`| Animal",
+            category: "Animal",
             description: {
                 content: "Givinig the random pic of dog",
                 usage: "dog"

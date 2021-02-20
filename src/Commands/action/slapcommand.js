@@ -7,7 +7,7 @@ module.exports = class SlapCommand extends Command {
     constructor() {
         super("SlapCommand", {
             aliases: ["slap"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Slap someone",
                 usage: "slpa [user]"

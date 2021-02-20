@@ -5,7 +5,7 @@ module.exports = class StopCommand extends Command {
     constructor() {
         super("StopCommand", {
             aliases: ["stop"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Stopping the music and leaving bot from voice channel",
                 usage: "stop"

@@ -6,7 +6,7 @@ module.exports = class DocsCommand extends Command {
     constructor() {
         super("DocsCommand", {
             aliases: ["docs"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Display Discord.js Documentation",
                 usage: "docs <query>"

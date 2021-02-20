@@ -7,7 +7,7 @@ module.exports = class SnowCommand extends Command {
     constructor() {
         super("SnowCommand", {
             aliases: ["snow"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add snow filter to image",
                 usage: "snow [user/image/^]"

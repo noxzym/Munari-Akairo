@@ -8,7 +8,7 @@ module.exports = class NPMCommand extends Command {
     constructor() {
         super("NPMCommand", {
             aliases: ["npm"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Give information about node module",
                 usage: "npm <package>"

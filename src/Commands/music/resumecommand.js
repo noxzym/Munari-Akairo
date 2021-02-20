@@ -5,7 +5,7 @@ module.exports = class ResumeCommand extends Command {
     constructor() {
         super("ResumeCommand", {
             aliases: ["resume"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Resume the current playback",
                 usage: "resume"

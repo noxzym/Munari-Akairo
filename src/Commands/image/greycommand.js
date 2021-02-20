@@ -6,7 +6,7 @@ module.exports = class GreyCommand extends Command {
     constructor() {
         super("GreyCommand", {
             aliases: ["grey"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add grey filter to image",
                 usage: "grey [user/image/^]"

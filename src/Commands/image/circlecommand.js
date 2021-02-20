@@ -6,7 +6,7 @@ module.exports = class CircleCommand extends Command {
     constructor() {
         super("CircleCommand", {
             aliases: ["circle"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Change image to circle",
                 usage: "circle [user/image/^]"

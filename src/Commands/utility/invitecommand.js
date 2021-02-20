@@ -5,7 +5,7 @@ module.exports = class InviteCommand extends Command {
     constructor() {
         super("InviteCommand", {
             aliases: ["invite"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Vote me",
                 usage: "vote"

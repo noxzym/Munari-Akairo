@@ -7,7 +7,7 @@ module.exports = class PunchCommand extends Command {
     constructor() {
         super("PunchCommand", {
             aliases: ["punch"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Punch someone",
                 usage: "punch [user]"

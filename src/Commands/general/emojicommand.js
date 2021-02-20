@@ -8,7 +8,7 @@ module.exports = class EmojiCommand extends Command {
     constructor() {
         super("EmojiCommand", {
             aliases: ["emoji", "em"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Get information about emoji",
                 usage: "emoji <emoji>"

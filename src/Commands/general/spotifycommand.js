@@ -11,7 +11,7 @@ module.exports = class SpotifyCommand extends Command {
     constructor() {
         super("SpotifyCommand", {
             aliases: ["spotify", "sp"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Display spotify information currently playing",
                 usage: "spotify [user]"

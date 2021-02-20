@@ -9,7 +9,7 @@ module.exports = class StatsCommand extends Command {
     constructor() {
         super("StatsCommand", {
             aliases: ["stats"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Display bot Statistics",
                 usage: "stats"

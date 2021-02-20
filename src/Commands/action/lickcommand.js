@@ -7,7 +7,7 @@ module.exports = class LickCommand extends Command {
     constructor() {
         super("LickCommand", {
             aliases: ["lick"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Lick Someone",
                 usage: "lick [user]"

@@ -6,7 +6,7 @@ module.exports = class RespectCommand extends Command {
     constructor() {
         super("RespectCommand", {
             aliases: ["respect", "f"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Pay respect for something",
                 usage: "respect [thing]"

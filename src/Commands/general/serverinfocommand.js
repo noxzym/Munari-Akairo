@@ -7,7 +7,7 @@ module.exports = class ServerinfoCommand extends Command {
     constructor() {
         super("ServerinfoCommand", {
             aliases: ["serverinfo", "si"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Display server informations",
                 usage: "serverinfo"

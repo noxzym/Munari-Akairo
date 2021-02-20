@@ -7,7 +7,7 @@ module.exports = class MagikCommand extends Command {
     constructor() {
         super("MagikCommand", {
             aliases: ["magik"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add magik filter to image",
                 usage: "magik [user/image/^]"

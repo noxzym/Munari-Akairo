@@ -5,7 +5,7 @@ module.exports = class SnipeCommand extends Command {
     constructor() {
         super("SnipeCommand", {
             aliases: ["snipe"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Get last message delete",
                 usage: "snipe [channel]"

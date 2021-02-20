@@ -5,7 +5,7 @@ module.exports = class KickCommand extends Command {
     constructor() {
         super("KickCommand", {
             aliases: ["kick"],
-            category: "\`⚙️\`| Moderation",
+            category: "Moderation",
             description: {
                 content: "Kick user from guild",
                 usage: "kick <user[mention/id]>"
@@ -33,7 +33,7 @@ module.exports = class KickCommand extends Command {
 
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
-        let reason = parse
+        let reason = parse.slice(1).join(" ");
         if (!reason) {
             reason = " - ";
         }

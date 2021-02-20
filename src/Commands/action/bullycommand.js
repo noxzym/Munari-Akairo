@@ -7,7 +7,7 @@ module.exports = class BullyCommand extends Command {
     constructor() {
         super("BullyCommand", {
             aliases: ["bully"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Bully someone",
                 usage: "bully [user]"

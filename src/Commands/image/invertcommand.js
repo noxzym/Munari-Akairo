@@ -6,7 +6,7 @@ module.exports = class InvertCommand extends Command {
     constructor() {
         super("InvertCommand", {
             aliases: ["invert"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add invert filter to image",
                 usage: "invert [user/image/^]"

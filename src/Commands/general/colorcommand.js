@@ -7,7 +7,7 @@ module.exports = class ColorCommand extends Command {
     constructor() {
         super("ColorCommand", {
             aliases: ["color"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Get sample color of hexcolor",
                 usage: "color <hex>"

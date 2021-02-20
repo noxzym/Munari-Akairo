@@ -5,7 +5,7 @@ module.exports = class PingCommand extends Command {
     constructor() {
         super("PingCommand", {
             aliases: ["ping"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "to give latency and websocket ping",
                 usage: "ping"

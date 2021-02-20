@@ -7,7 +7,7 @@ module.exports = class KissCommand extends Command {
     constructor() {
         super("KissCommand", {
             aliases: ["kiss"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Kiss Someone",
                 usage: "kiss [user]"

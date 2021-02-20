@@ -7,7 +7,7 @@ module.exports = class TotalcodeCommand extends Command {
     constructor() {
         super("TotalcodeCommand", {
             aliases: ["totalcode"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Get total code of bot",
                 usage: "totalcode"

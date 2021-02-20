@@ -12,6 +12,22 @@ module.exports = class UtilHandler {
         if (isNaN(value)) return;
         return prettyMilliseconds(value, { verbose: true, compact: false, secondsDecimalDigits: 0 })
     };
+    async progressbar(total, current, size = 40, line = '▬', slider = '🔘') {
+        var bar, calculated
+        if (current > total) {
+            bar = line.repeat(size + 2);
+            const percentage = (current / total) * 100;
+        } else {
+            const percentage = current / total;
+            const progress = Math.round((size * percentage));
+            const emptyProgress = size - progress;
+            const progressText = line.repeat(progress).replace(/.$/, slider);
+            const emptyProgressText = line.repeat(emptyProgress);
+            bar = progressText + emptyProgressText;
+            calculated = percentage * 100;
+        };
+        return bar
+    };
     async parsemsg(Util, message, args) {
         const parse = message.content.trim().split(" ");
         const parsedata = parse[1] !== undefined && parse[1].includes("^") ? parse[1].length : 0;

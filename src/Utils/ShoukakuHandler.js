@@ -37,6 +37,10 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.player.setPaused(false);
         message.guild.queue.playing = true;
     };
+    async setVolume(message, volume) {
+        message.guild.queue.player.setVolume(volume/100);
+        message.guild.queue.volume = volume;
+    }
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;

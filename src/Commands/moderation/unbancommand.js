@@ -5,7 +5,7 @@ module.exports = class UnbanCommand extends Command {
     constructor() {
         super("UnbanCommand", {
             aliases: ["unban"],
-            category: "\`⚙️\`| Moderation",
+            category: "Moderation",
             description: {
                 content: "Unbanned user from the guild",
                 usage: "unban <id>"

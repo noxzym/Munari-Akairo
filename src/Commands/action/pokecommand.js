@@ -7,7 +7,7 @@ module.exports = class PokeCommand extends Command {
     constructor() {
         super("PokeCommand", {
             aliases: ["poke"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Poke someone",
                 usage: "poke [user]"

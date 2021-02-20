@@ -5,7 +5,7 @@ module.exports = class ClearCommand extends Command {
     constructor() {
         super("ClearCommand", {
             aliases: ["clear", "prune"],
-            category: "\`⚙️\`| Moderation",
+            category: "Moderation",
             description: {
                 content: "",
                 usage: ""

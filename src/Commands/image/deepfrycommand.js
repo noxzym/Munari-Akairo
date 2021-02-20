@@ -7,7 +7,7 @@ module.exports = class DeepfryCommand extends Command {
     constructor() {
         super("DeepfryCommand", {
             aliases: ["deepfry"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add deepfry filter to image",
                 usage: "deepfry [user/image/^]"

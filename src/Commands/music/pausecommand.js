@@ -5,7 +5,7 @@ module.exports = class PauseCommand extends Command {
     constructor() {
         super("PauseCommand", {
             aliases: ["pause"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Pauses current playback",
                 usage: "pause"

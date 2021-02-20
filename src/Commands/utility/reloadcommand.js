@@ -5,7 +5,7 @@ module.exports = class ReloadCommand extends Command {
     constructor() {
         super("ReloadCommand", {
             aliases: ["reload"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Update change without restart",
                 usage: "reload"

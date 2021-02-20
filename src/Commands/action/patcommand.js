@@ -7,7 +7,7 @@ module.exports = class PatCommand extends Command {
     constructor() {
         super("PatCommand", {
             aliases: ["pat"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Pat someone",
                 usage: "pat [user]"

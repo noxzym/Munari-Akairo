@@ -10,7 +10,7 @@ module.exports = class InstagramCommand extends Command {
     constructor() {
         super("InstagramCommand", {
             aliases: ["instagram", "ig"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Get information instagram user",
                 usage: "instagram <username>"

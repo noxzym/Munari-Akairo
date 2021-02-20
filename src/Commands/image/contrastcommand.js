@@ -5,8 +5,8 @@ const { createEmbed } = require("../../Utils/CreateEmbed")
 module.exports = class ContrastCommand extends Command {
     constructor() {
         super("ContrastCommand", {
-            aliases: ["constrast"],
-            category: "\`🖼️\`| Image",
+            aliases: ["contrast"],
+            category: "Image",
             description: {
                 content: "Add constrast filter to image",
                 usage: "contrast [user/image/^]"

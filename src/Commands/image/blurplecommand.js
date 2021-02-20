@@ -1,13 +1,13 @@
 const { Command } = require("discord-akairo");
 const { Util, MessageAttachment } = require('discord.js');
 const { createEmbed } = require("../../Utils/CreateEmbed")
-const superagent = require("superagent");
+const fetch = require("node-fetch");
 
 module.exports = class BlurpleCommand extends Command {
     constructor() {
         super("BlurpleCommand", {
             aliases: ["blurple"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add blue purple filter to image",
                 usage: "blurple [user/image/^]"
@@ -36,8 +36,8 @@ module.exports = class BlurpleCommand extends Command {
             return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Invalid Data")).then(x => x.delete({ timeout: 10000 }));
         };
 
-        const { body } = await superagent.get(`https://neko-love.xyz/api/v2/blurple?url=${data}`);
-        let ath = new MessageAttachment(body.url, "blurple.png")
+        const { url } = await fetch(`https://neko-love.xyz/api/v2/blurple?url=${data}`).then(x => x.json())
+        let ath = new MessageAttachment(url, "blurple.png")
 
         const e = createEmbed("info")
             .setImage("attachment://blurple.png")

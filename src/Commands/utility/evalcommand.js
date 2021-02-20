@@ -7,7 +7,7 @@ module.exports = class EvalCommand extends Command {
     constructor() {
         super("EvalCommand", {
             aliases: ["eval", "ev"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Run code snippets",
                 usage: "eval <code>"

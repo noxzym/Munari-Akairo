@@ -5,7 +5,7 @@ module.exports = class SayCommand extends Command {
     constructor() {
         super("SayCommand", {
             aliases: ["say"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Make me say anything",
                 usage: "say <message>"
@@ -27,7 +27,7 @@ module.exports = class SayCommand extends Command {
         })
     };
     async exec(message, { content }) {
-        (message.guild.me.hasPermission("MANAGE_MESSAGES") || message.channel.permissionsFor(client.user).has('MANAGE_MESSAGES')) ? message.delete() : null
+        (message.guild.me.hasPermission("MANAGE_MESSAGES") || message.channel.permissionsFor(this.client.user).has('MANAGE_MESSAGES')) ? message.delete() : null
         if (!content && message.attachments.first() === undefined) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No message given")).then(x => { x.delete({ timeout: 10000 }) });
 
         if (message.attachments.first() !== undefined) {

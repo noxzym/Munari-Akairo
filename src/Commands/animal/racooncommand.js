@@ -3,14 +3,14 @@ const { MessageAttachment } = require("discord.js");
 const { createEmbed } = require("../../Utils/CreateEmbed");
 const fetch = require("node-fetch");
 
-module.exports = class BirdCommand extends Command {
+module.exports = class RacoonCommand extends Command {
     constructor() {
-        super("BirdCommand", {
-            aliases: ["bird"],
+        super("RacoonCommand", {
+            aliases: ["racoon"],
             category: "Animal",
             description: {
-                content: "Giving the random pic of bird",
-                usage: "bird"
+                content: "Giving the random pic of racoom",
+                usage: "racoon"
             },
             cooldown: 1.5e4,
             channel: "guild",
@@ -23,12 +23,12 @@ module.exports = class BirdCommand extends Command {
         })
     };
     async exec(message) {
-        const data = await fetch("https://shibe.online/api/birds").then(x => x.json());
-        const ath = new MessageAttachment(data.join(" "), "bird.png");
+        const { image } = await fetch("https://some-random-api.ml/animal/racoon").then(x => x.json());
+        const ath = new MessageAttachment(image, "racoon.png");
 
         let e = createEmbed("info")
-            .setAuthor(`🐦| This is your bird ${message.author.username}`)
-            .setImage("attachment://bird.png")
+            .setAuthor(`🐨| This is your racoon ${message.author.username}`)
+            .setImage("attachment://racoon.png")
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.util.send({ embed: e, files: [ath] })

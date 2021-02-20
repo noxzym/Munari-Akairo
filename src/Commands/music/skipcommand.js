@@ -5,7 +5,7 @@ module.exports = class SkipCommand extends Command {
     constructor() {
         super("SkipCommand", {
             aliases: ["skip", "s"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Skip the current playback",
                 usage: "skip"

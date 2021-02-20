@@ -5,7 +5,7 @@ module.exports = class RepeatCommand extends Command {
     constructor() {
         super("RepeatCommand", {
             aliases: ["repeat", "loop"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Repeating the music queue",
                 usage: "repeat"

@@ -5,7 +5,7 @@ module.exports = class NukeCommand extends Command {
     constructor() {
         super("NukeCommand", {
             aliases: ["nuke"],
-            category: "\`⚙️\`| Moderation",
+            category: "Moderation",
             description: {
                 content: "Clear all ecosystem of the channel",
                 usage: "nuke <channel[mention/id]>"

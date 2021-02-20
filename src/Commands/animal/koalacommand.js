@@ -3,14 +3,14 @@ const { MessageAttachment } = require("discord.js");
 const { createEmbed } = require("../../Utils/CreateEmbed");
 const fetch = require("node-fetch");
 
-module.exports = class CatCommand extends Command {
+module.exports = class KoalaCommand extends Command {
     constructor() {
-        super("CatCommand", {
-            aliases: ["cat"],
+        super("KoalaCommand", {
+            aliases: ["koala"],
             category: "Animal",
             description: {
-                content: "Giving the random pic of cat",
-                usage: "cat"
+                content: "Giving the random pic of koala",
+                usage: "koala"
             },
             cooldown: 1.5e4,
             channel: "guild",
@@ -23,14 +23,14 @@ module.exports = class CatCommand extends Command {
         })
     };
     async exec(message) {
-        const { file } = await fetch("http://aws.random.cat/meow").then(x => x.json());
-        const ath = new MessageAttachment(file, "cat.png");
+        const { image } = await fetch("https://some-random-api.ml/animal/koala").then(x => x.json());
+        const ath = new MessageAttachment(image, "koala.png");
 
-        const e = createEmbed("info")
-            .setAuthor(`🐈| This is your cat ${message.author.username}`)
-            .setImage("attachment://cat.png")
-            .setTimestamp()
-            .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
+        let e = createEmbed("info")
+            .setAuthor(`🦝| This is your koala ${message.author.username}`)
+            .setImage("attachment://koala.png")
+            .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
+            .setTimestamp();
         message.util.send({ embed: e, files: [ath] })
     };
 }

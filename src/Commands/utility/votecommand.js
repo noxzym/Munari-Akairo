@@ -6,7 +6,7 @@ module.exports = class VoteCommand extends Command {
     constructor() {
         super("VoteCommand", {
             aliases: ["vote"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Vote me",
                 usage: "vote"

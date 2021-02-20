@@ -5,7 +5,7 @@ module.exports = class BanCommand extends Command {
     constructor() {
         super("BanCommand", {
             aliases: ["ban"],
-            category: "\`⚙️\`| Moderation",
+            category: "Moderation",
             description: {
                 content: "Ban user from the guild",
                 usage: "ban <user[mention/id]>"
@@ -35,7 +35,7 @@ module.exports = class BanCommand extends Command {
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
         if (isNaN(member)) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
-        let reason = parse
+        let reason = parse.slice(1).join(" ");
         if (!reason) {
             reason = " - ";
         }

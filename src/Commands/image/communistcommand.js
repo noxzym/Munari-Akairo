@@ -7,7 +7,7 @@ module.exports = class CommunistCommand extends Command {
     constructor() {
         super("CommunistCommand", {
             aliases: ["communist"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add communist filter to image",
                 usage: "communist [user/image/^]"

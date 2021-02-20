@@ -6,7 +6,7 @@ module.exports = class ChangelogCommand extends Command {
     constructor() {
         super("ChangelogCommand", {
             aliases: ["changelog", "latest"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Get latest change",
                 usage: "changelog"

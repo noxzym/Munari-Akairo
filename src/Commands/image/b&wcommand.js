@@ -7,7 +7,7 @@ module.exports = class BnWCommand extends Command {
     constructor() {
         super("BnWCommand", {
             aliases: ["b&w", "bnw"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add black and white filter to image",
                 usage: "b&w [user/image/^]"

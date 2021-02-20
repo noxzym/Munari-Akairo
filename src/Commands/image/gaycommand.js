@@ -6,7 +6,7 @@ module.exports = class GayCommand extends Command {
     constructor() {
         super("GayCommand", {
             aliases: ["gay"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add gay filter to image",
                 usage: "gay [user/image/^]"

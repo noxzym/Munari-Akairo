@@ -5,7 +5,7 @@ module.exports = class AvatarCommand extends Command {
     constructor() {
         super("AvatarCommand", {
             aliases: ["avatar", "av"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Display Avatar User",
                 usage: "avatar [user]"
@@ -42,7 +42,7 @@ module.exports = class AvatarCommand extends Command {
         };
         let member =
             message.guild.members.cache.get(user) ||
-            message.guild.members.cache.find(x => x.user.username.toLowerCase() === `${user}` || x.user.username === `${user}`) ||
+            message.guild.members.cache.find(x => x.user.username.toLowerCase() === `${user === null ? message.author.username : user}` || x.user.username === `${user === null ? message.author.username : user}`) ||
             message.mentions.members.first() ||
             message.member;
 

@@ -5,7 +5,7 @@ module.exports = class HelpCommand extends Command {
     constructor() {
         super("HelpCommand", {
             aliases: ["help", "h", "?"],
-            category: "\`🛠️\`| Utility",
+            category: "Utility",
             description: {
                 content: "Display help command",
                 usage: "help [command]"
@@ -28,7 +28,7 @@ module.exports = class HelpCommand extends Command {
     };
     async exec(message, { command }) {
         const prefix = this.handler.prefix;
-        const totalcmd = await this.handler.categories.map(x => x.size).reduce((a, b) => b + a)
+        const totalcmd = this.handler.categories.map(x => x.size).reduce((a, b) => b + a)
         if (command) {
             let e = createEmbed("info")
                 .setDescription(
@@ -46,21 +46,31 @@ module.exports = class HelpCommand extends Command {
                 .setFooter(`ℹ️ Don't include <> or []. It's mean, <> is required and [] is optional`)
             return message.util.send(e)
         };
+
+        const action = this.handler.categories.filter(x => x.id === "Action").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const animal = this.handler.categories.filter(x => x.id === "Animal").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const fun = this.handler.categories.filter(x => x.id === "Fun").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const general = this.handler.categories.filter(x => x.id === "General").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const image = this.handler.categories.filter(x => x.id === "Image").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const moderation = this.handler.categories.filter(x => x.id === "Moderation").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const music = this.handler.categories.filter(x => x.id === "Music").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+        const Utility = this.handler.categories.filter(x => x.id === "Utility").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
+
         let e = createEmbed("info")
             .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
-            .setDescription(
-                `Type **\`${prefix}help [command]\`** to get how to use the command\n\u200b`
-            )
+            .setDescription(`Type **\`${prefix}help [command]\`** to get how to use the command\n\u200b`)
             .setThumbnail(this.client.user.displayAvatarURL())
             .setFooter(`Commanded by ${message.author.tag} | ${totalcmd} commands has been loaded`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp()
-        for (const category of this.handler.categories.values()) {
-            e.addField(
-                `${category.id}`,
-                `${category.filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ")}`
-            )
-        };
-        e.addField('\u200b', "**Quick Links:【[Vote me](https://top.gg/bot/740112353483554858/vote)】 • 【[Invite me](https://discord.com/oauth2/authorize?client_id=740112353483554858&scope=bot&permissions=2146827639)】**")
+            .addField("\`😉\`| Action", action)
+            .addField("\`🐶\`| Animal", animal)
+            .addField("\`🎲\`| Fun", fun)
+            .addField("\`🎭\`| General", general)
+            .addField("\`🖼️\`| Image", image)
+            .addField("\`⚙️\`| Moderation", moderation)
+            .addField("\`🎶\`| Music", music)
+            .addField("\`🛠️\`| Utility", Utility)
+            .addField('\u200b', "**Quick Links:【[Vote me](https://top.gg/bot/740112353483554858/vote)】 • 【[Invite me](https://discord.com/oauth2/authorize?client_id=740112353483554858&scope=bot&permissions=2146827639)】**")
         return message.util.send(e)
     };
 }

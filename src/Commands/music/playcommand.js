@@ -7,7 +7,7 @@ module.exports = class PlayCommand extends Command {
     constructor() {
         super("PlayCommand", {
             aliases: ["play", "p"],
-            category: "\`🎶\`| Music",
+            category: "Music",
             description: {
                 content: "Play song from youtube, spotify",
                 usage: "play <song[youtube/spotify][title/url]>"
@@ -58,13 +58,19 @@ module.exports = class PlayCommand extends Command {
             const trackpl = await data.tracks.slice(0, 50);
             if (queue) {
                 for (let i = 0; i < trackpl.length; i++) {
+                    const skip = 0;
+                    if (data[i].info.isStream) {
+                        skip++;
+                        return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
+                    };
                     queue.songs.push({
                         track: trackpl[i].track,
+                        seekable: data[i].isSeekable,
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
                         duration: convert(trackpl[i].info.length, { colonNotation: true }),
-                        nowplaying: trackpl[i].info.length,
+                        nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
                         thumbnail: `https://img.youtube.com/vi/${trackpl[i].info.identifier}/sddefault.jpg?size=4096`,
                         requester: message.author
@@ -72,13 +78,19 @@ module.exports = class PlayCommand extends Command {
                 }
             } else {
                 for (let i = 0; i < trackpl.length; i++) {
+                    const skip = 0;
+                    if (data[i].info.isStream) {
+                        skip++;
+                        return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
+                    };
                     queueConstruct.songs.push({
                         track: trackpl[i].track,
+                        seekable: data[i].isSeekable,
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
                         duration: convert(trackpl[i].info.length, { colonNotation: true }),
-                        nowplaying: trackpl[i].info.length,
+                        nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
                         thumbnail: `https://img.youtube.com/vi/${trackpl[i].info.identifier}/sddefault.jpg?size=4096`,
                         requester: message.author
@@ -115,14 +127,15 @@ module.exports = class PlayCommand extends Command {
                     } catch (e) {
                         console.log(e)
                         return message.channel.send(createEmbed("error", "The request has been canceled because no respond!")).then(x => x.delete({ timeout: 10000 }));
-                    }
+                    };
+                    if (video.info.isStream) return message.channel.send(createEmbed("info", `Cannot playing this song because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                     song = {
                         track: video.track,
                         title: Util.escapeMarkdown(video.info.title),
                         identifier: video.info.identifier,
                         author: video.info.author,
                         duration: convert(video.info.length, { colonNotation: true }),
-                        nowplaying: video.info.length,
+                        nowplaying: video.info.length / 1000,
                         url: video.info.uri,
                         thumbnail: `https://img.youtube.com/vi/${video.info.identifier}/sddefault.jpg?size=4096`,
                         requester: message.author
@@ -130,13 +143,14 @@ module.exports = class PlayCommand extends Command {
                 } else {
                     try {
                         const track = data.tracks.shift();
+                        if (track.info.isStream) return message.channel.send(createEmbed("info", `Cannot playing this song because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                         song = {
                             track: track.track,
                             title: Util.escapeMarkdown(track.info.title),
                             identifier: track.info.identifier,
                             author: track.info.author,
                             duration: convert(track.info.length, { colonNotation: true }),
-                            nowplaying: track.info.length,
+                            nowplaying: track.info.length / 1000,
                             url: track.info.uri,
                             thumbnail: `https://img.youtube.com/vi/${track.info.identifier}/sddefault.jpg?size=4096`,
                             requester: message.author

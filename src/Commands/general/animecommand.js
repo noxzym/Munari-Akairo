@@ -9,7 +9,7 @@ module.exports = class AnimeCommand extends Command {
     constructor() {
         super("AnimeCommand", {
             aliases: ["anime"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Get anime information by title",
                 usage: "anime <title>"

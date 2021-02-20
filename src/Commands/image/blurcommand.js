@@ -7,7 +7,7 @@ module.exports = class BlurCommand extends Command {
     constructor() {
         super("BlurCommand", {
             aliases: ["bluer"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add blur filter to image",
                 usage: "blur [user/image/^]"

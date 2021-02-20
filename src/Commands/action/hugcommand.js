@@ -7,7 +7,7 @@ module.exports = class HugCommand extends Command {
     constructor() {
         super("HugCommand", {
             aliases: ["hug"],
-            category: "\`😉\`| Action",
+            category: "Action",
             description: {
                 content: "Hug someone",
                 usage: "hug [user]"

@@ -7,7 +7,7 @@ module.exports = class UserinfoCommand extends Command {
     constructor() {
         super("UserinfoCommand", {
             aliases: ["userinfo", "ui"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Display user informations",
                 usage: "userinfo [user[mention/id]]"
@@ -31,6 +31,7 @@ module.exports = class UserinfoCommand extends Command {
     async exec(message, { user }) {
         const member =
             message.guild.member(user) ||
+            message.guild.members.cache.find(x => x.user.username.toLowerCase() === `${user === null ? message.author.username : user}` || x.user.username === `${user === null ? message.author.username : user}`) ||
             message.mentions.members.first() ||
             message.member;
 

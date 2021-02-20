@@ -6,7 +6,7 @@ module.exports = class SepiaCommand extends Command {
     constructor() {
         super("SepiaCommand", {
             aliases: ["sepia"],
-            category: "\`🖼️\`| Image",
+            category: "Image",
             description: {
                 content: "Add sepia filter to image",
                 usage: "sepia [user/image/^]"

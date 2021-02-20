@@ -9,7 +9,7 @@ module.exports = class MangaCommand extends Command {
     constructor() {
         super("MangaCommand", {
             aliases: ["manga"],
-            category: "\`🎭\`| General",
+            category: "General",
             description: {
                 content: "Get manga information by title",
                 usage: "manga <title>"
