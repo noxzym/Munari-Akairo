@@ -14,8 +14,8 @@ module.exports = class ReadyEvent extends Listener {
         setInterval(() => {
             const status = [
                 `• Mention me for know my prefix •`,
-                `• Ready to ${client.guilds.cache.size} Servers •`,
-                `• With ${client.users.cache.size} Users •`,
+                `• Ready to ${this.client.guilds.cache.size} Servers •`,
+                `• With ${this.client.users.cache.size} Users •`,
             ];
             const type = [
                 "PLAYING",
@@ -24,7 +24,7 @@ module.exports = class ReadyEvent extends Listener {
             ]
             let random = Math.floor(Math.random() * status.length)
             let randomtp = Math.floor(Math.random() * type.length)
-            client.user.setActivity(status[random], { type: type[randomtp] });
+            this.client.user.setActivity(status[random], { type: type[randomtp] });
         }, 60 * 1000 * 30);
     }
 }

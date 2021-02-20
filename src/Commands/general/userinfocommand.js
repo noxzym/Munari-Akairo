@@ -30,10 +30,11 @@ module.exports = class UserinfoCommand extends Command {
     };
     async exec(message, { user }) {
         const member =
-            message.guild.members.cache.get(user) ||
-            message.guild.members.cache.find(x => x.user.username.toLowerCase() === `${user}` || x.user.username === `${user}`) ||
+            message.guild.member(user) ||
             message.mentions.members.first() ||
             message.member;
+
+        console.log(message.member)
 
         const roles = member.roles.cache.sort((a, b) => b.position - a.position);
         const date = moment(member.user.createdAt).format("MMM Do YYYY");
