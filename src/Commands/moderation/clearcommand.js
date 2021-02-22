@@ -23,7 +23,7 @@ module.exports = class ClearCommand extends Command {
             typing: true,
             quoted: false,
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "MANAGE_MESSAGES"],
-            userPermissions: null,
+            userPermissions: ["MANAGE_MESSAGES"],
         })
     };
     async exec(message, { parse }) {

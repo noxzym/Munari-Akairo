@@ -59,43 +59,45 @@ module.exports = class PlayCommand extends Command {
             if (queue) {
                 for (let i = 0; i < trackpl.length; i++) {
                     const skip = 0;
-                    if (data[i].info.isStream) {
+                    if (trackpl[i].info.isStream) {
                         skip++;
                         return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                     };
                     queue.songs.push({
                         track: trackpl[i].track,
-                        seekable: data[i].isSeekable,
+                        seekable: trackpl[i].info.isSeekable,
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
                         duration: convert(trackpl[i].info.length, { colonNotation: true }),
                         nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
-                        thumbnail: `https://img.youtube.com/vi/${trackpl[i].info.identifier}/sddefault.jpg?size=4096`,
+                        thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
                         requester: message.author
-                    })
-                }
+                    });
+                };
+                message.util.send(createEmbed("info", `**Playlist \`${Util.escapeMarkdown(await data.playlistName)}\` has been added to Queue**`).setThumbnail(`https://i.ytimg.com/vi/${await data.tracks[0].info.identifier}/hqdefault.jpg`));
             } else {
                 for (let i = 0; i < trackpl.length; i++) {
                     const skip = 0;
-                    if (data[i].info.isStream) {
+                    if (trackpl[i].info.isStream) {
                         skip++;
                         return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                     };
                     queueConstruct.songs.push({
                         track: trackpl[i].track,
-                        seekable: data[i].isSeekable,
+                        seekable: trackpl[i].info.isSeekable,
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
                         duration: convert(trackpl[i].info.length, { colonNotation: true }),
                         nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
-                        thumbnail: `https://img.youtube.com/vi/${trackpl[i].info.identifier}/sddefault.jpg?size=4096`,
+                        thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
                         requester: message.author
-                    })                    
-                }
+                    });                   
+                };
+                message.util.send(createEmbed("info", `**Playlist \`${Util.escapeMarkdown(await data.playlistName)}\` has been added to Queue**`).setThumbnail(`https://i.ytimg.com/vi/${await data.tracks[0].info.identifier}/hqdefault.jpg`));
             }
         } else {
             var song;
@@ -131,13 +133,14 @@ module.exports = class PlayCommand extends Command {
                     if (video.info.isStream) return message.channel.send(createEmbed("info", `Cannot playing this song because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                     song = {
                         track: video.track,
+                        seekable: video.info.isSeekable,
                         title: Util.escapeMarkdown(video.info.title),
                         identifier: video.info.identifier,
                         author: video.info.author,
                         duration: convert(video.info.length, { colonNotation: true }),
                         nowplaying: video.info.length / 1000,
                         url: video.info.uri,
-                        thumbnail: `https://img.youtube.com/vi/${video.info.identifier}/sddefault.jpg?size=4096`,
+                        thumbnail: `https://i.ytimg.com/vi/${video.info.identifier}/hqdefault.jpg`,
                         requester: message.author
                     };
                 } else {
@@ -146,13 +149,14 @@ module.exports = class PlayCommand extends Command {
                         if (track.info.isStream) return message.channel.send(createEmbed("info", `Cannot playing this song because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                         song = {
                             track: track.track,
+                            seekable: track.info.isSeekable,
                             title: Util.escapeMarkdown(track.info.title),
                             identifier: track.info.identifier,
                             author: track.info.author,
                             duration: convert(track.info.length, { colonNotation: true }),
                             nowplaying: track.info.length / 1000,
                             url: track.info.uri,
-                            thumbnail: `https://img.youtube.com/vi/${track.info.identifier}/sddefault.jpg?size=4096`,
+                            thumbnail: `https://i.ytimg.com/vi/${track.info.identifier}/hqdefault.jpg`,
                             requester: message.author
                         };
                     } catch (e) {
@@ -169,6 +173,7 @@ module.exports = class PlayCommand extends Command {
                     queue.songs.push(song);
                     return message.util.send(createEmbed("info", `✅ **\`${song.title}\`** by **\`${message.author.username}\`** Has been added to queue!`))
                 } else {
+                    message.util.send(createEmbed("info", `✅ **\`${song.title}\`** by **\`${message.author.username}\`** Has been added to queue!`))
                     queueConstruct.songs.push(song);
                 }
 

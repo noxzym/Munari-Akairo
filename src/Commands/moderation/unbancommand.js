@@ -23,7 +23,7 @@ module.exports = class UnbanCommand extends Command {
             typing: true,
             quoted: false,
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "BAN_MEMBERS"],
-            userPermissions: null,
+            userPermissions: ["BAN_MEMBERS"],
         })
     };
     async exec(message, { parse }) {

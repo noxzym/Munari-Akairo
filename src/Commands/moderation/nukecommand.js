@@ -23,7 +23,7 @@ module.exports = class NukeCommand extends Command {
             typing: true,
             quoted: false,
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "MANAGE_CHANNELS"],
-            userPermissions: null,
+            userPermissions: ["MANAGE_CHANNELS"],
         })
     };
     async exec(message, { parse }) {
