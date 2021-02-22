@@ -92,31 +92,38 @@ module.exports = class ShoukakuHandler {
                     .setThumbnail(message.guild.queue.songs[0].thumbnail)
                     .setTimestamp()
                     .setFooter(`Requested by ${message.guild.queue.songs[0].requester.username}`)
-                this.client.channels.cache.get(message.guild.queue.textChannel).send(e)
+                this.client.channels.cache.get(message.guild.queue.textChannel).send(e).then((x) => {
+                  message.guild.queue.messageId = x.id
+                })
             });
             message.guild.queue.player.on("end", async () => {
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
                 let songtopush = await message.guild.queue.songs.shift();
                 if (message.guild.queue.loop) {
                     message.guild.queue.songs.push(songtopush);
                     message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true });
                 } else if (message.guild.queue.songs.length === 0) {
-                    await this.client.channels.cache.get(message.guild.queue.textChannel).send(createEmbed("info", "Request more song to keep me in the voice channel")).then(msg => { msg.delete({ timeout: 10000 }); })
+                    await this.client.channels.cache.get(message.guild.queue.textChannel).send(createEmbed("info", "**Request more song to keep me in the voice channel**")).then(msg => { msg.delete({ timeout: 10000 }); })
                     return this.leave(message);
                 } else {
                     message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true });
                 }
             });
             message.guild.queue.player.on("closed", () => {
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
                 this.leave(message);
             });
             message.guild.queue.player.on("error", () => {
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
                 this.leave(message);
             });
             message.guild.queue.player.on("nodeDisconnect", () => {
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
                 this.leave(message);
             });
         } catch (e) {
             console.log(e);
+            this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
             message.guild.queue.player.disconnect()
             message.guild.queue = null;
         }

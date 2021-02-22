@@ -51,7 +51,7 @@ module.exports = class PlayCommand extends Command {
             loop: false,
             volume: 100,
             playing: true,
-            timeout: null
+            messageId: null
         };
 
         if (data.type === "PLAYLIST") {
