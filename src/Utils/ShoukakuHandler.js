@@ -7,7 +7,7 @@ const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
 const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' }
 const LavalinkServer = [MuriNode, MuriNode2, MuriNode3];
-const ShoukakuOptions = { moveOnDisconnect: true, resumable: false, resumableTimeout: 30, reconnectTries: 2, restTimeout: 10000 };
+const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 module.exports = class ShoukakuHandler {
     constructor(client) {

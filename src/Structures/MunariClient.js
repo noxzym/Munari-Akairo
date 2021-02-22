@@ -4,7 +4,7 @@ require('../Extenders/InlineReply');
 require('../Extenders/GuildMember');
 require("../Extenders/Guild");
 
-const { AkairoClient, CommandHandler, ListenerHandler } = require("discord-akairo");
+const { AkairoClient, CommandHandler, ListenerHandler, Intents } = require("discord-akairo");
 const { Api } = require('@top-gg/sdk')
 const PlayerHandler = require('../Utils/PlayerHandler');
 const UtilHandler = require('../Utils/UtilHandler');
@@ -27,15 +27,14 @@ module.exports = class MunariClient extends AkairoClient {
                 restTimeOffset: 0,
                 ws: {
                     intents: [
-                        "GUILDS",
+                        Intents.FLAGS.GUILDS,
                         "GUILD_BANS",
                         "GUILD_EMOJIS",
                         "GUILD_VOICE_STATES",
                         "GUILD_PRESENCES",
                         "GUILD_MESSAGES",
                         "GUILD_MESSAGE_REACTIONS",
-                        "GUILD_MESSAGE_TYPING",
-                        "GUILD_MEMBERS"
+                        "GUILD_MESSAGE_TYPING"
                     ]
                 }
             }

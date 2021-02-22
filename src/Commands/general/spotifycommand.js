@@ -24,7 +24,7 @@ module.exports = class SpotifyCommand extends Command {
                 {
                     id: "nocanvas",
                     match: "flag",
-                    flag: "--nocnavas"
+                    flag: "--nocanvas"
                 }
             ],
             cooldown: 1.5e4,
@@ -39,7 +39,7 @@ module.exports = class SpotifyCommand extends Command {
     };
     async exec(message, { user, nocanvas }) {
         const { delmsg } = await this.client.util
-        const member = message.guild.members.cache.get(user) || message.mentions.members.first() || message.member
+        const member = message.guild.members.cache.get(user.replace("--nocanvas", "")) || message.mentions.members.first() || message.member
 
         const presence = member.presence.activities.filter(x => x.name === 'Spotify')[0]
         if (!presence) return message.inlineReply(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Cannot find spotify presence")).then(x => { x.delete({ timeout: 10000 }) })
