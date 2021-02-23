@@ -39,7 +39,7 @@ module.exports = class PlayCommand extends Command {
         if (!search) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
 
         const queue = message.guild.queue;
-        var data = await this.client.shoukaku.getSongs(search.replace("--search", "").replace("--find", ""));
+        let data = await this.client.shoukaku.getSongs(search.replace("--search", "").replace("--find", ""));
         if (!data || data.tracks.length === 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Can't get song data")).then(x => x.delete({ timeout: 10000 }));
 
         var queueConstruct = {
