@@ -12,7 +12,7 @@ module.exports = class SadcatCommand extends Command {
                 content: "Giving the random pic of sadcat",
                 usage: ""
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -21,7 +21,7 @@ module.exports = class SadcatCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const { image } = new alex(this.client.config.alexapi);
         const { file } = await image.sadcat();
@@ -33,5 +33,5 @@ module.exports = class SadcatCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
         message.util.send({ embed: e, files: [ath] })
-    };
+    }
 }

@@ -25,7 +25,7 @@ module.exports = class UnbanCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"],
         })
-    };
+    }
     async exec(message, { parse }) {
         const member = parse;
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
@@ -37,7 +37,7 @@ module.exports = class UnbanCommand extends Command {
         }
         else {
             reason = `${reason}`
-        };
+        }
 
         try {
             const data = await this.client.users.fetch(member)
@@ -47,7 +47,7 @@ module.exports = class UnbanCommand extends Command {
             var databan = await message.guild.fetchBans()
         } catch (e) {
             return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Unknown User")).then(msg => { msg.delete({ timeout: 10000 }) })
-        };
+        }
 
         if (databan.size < 1) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation canceled because there's no members are banned from this guild")).then(msg => { msg.delete({ timeout: 10000 }) })
         if (databan.get(id) === undefined) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. This user was not banned from this guild`)).then(msg => { msg.delete({ timeout: 10000 }) })
@@ -58,5 +58,5 @@ module.exports = class UnbanCommand extends Command {
         } catch (e) {
             return message.channel.send(createEmbed("error", `Sorry i couldn't unban this user because \`\`\`js\n${e.message}\n\`\`\``)).then(msg => { msg.delete({ timeout: 10000 }) })
         }
-    };
+    }
 }

@@ -5,7 +5,7 @@ const { join } = require("path");
 module.exports = class CanvasHandler {
     constructor(client) {
         this.client = client
-    };
+    }
     async gay(img) {
         const image = await loadImage(img);
         const bg = await loadImage(join(__dirname, "..", "data", "images", "gay.png"));
@@ -30,12 +30,12 @@ module.exports = class CanvasHandler {
             imgData.data[i] = brightness;
             imgData.data[i + 1] = brightness;
             imgData.data[i + 2] = brightness;
-        };
+        }
 
         ctx.putImageData(imgData, 0, 0);
 
         return canvas.toBuffer();
-    };
+    }
 
     async invert(img) {
         const image = await loadImage(img);
@@ -55,7 +55,7 @@ module.exports = class CanvasHandler {
         ctx.putImageData(imgData, 0, 0);
 
         return canvas.toBuffer()
-    };
+    }
 
     async sepia(img) {
         const image = await loadImage(img);
@@ -73,7 +73,7 @@ module.exports = class CanvasHandler {
         ctx.putImageData(data, 0, 0);
 
         return canvas.toBuffer()
-    };
+    }
 
     async contrast(img) {
         const image = await loadImage(img);
@@ -92,7 +92,7 @@ module.exports = class CanvasHandler {
         ctx.putImageData(data, 0, 0);
 
         return await canvas.toBuffer();
-    };
+    }
 
     async brightness(img, amount) {
         const image = await loadImage(img);
@@ -111,7 +111,7 @@ module.exports = class CanvasHandler {
 
         const ath = new MessageAttachment(canvas.toBuffer(), "brightness.png")
         return ath
-    };
+    }
 
     async darkness(img, amount) {
         const image = await loadImage(img);
@@ -131,7 +131,7 @@ module.exports = class CanvasHandler {
 
         const ath = new MessageAttachment(canvas.toBuffer(), "darkness.png")
         return ath
-    };
+    }
 
     async threshold(img, amount = 50) {
         const image = await loadImage(img);
@@ -153,7 +153,7 @@ module.exports = class CanvasHandler {
 
         const ath = new MessageAttachment(canvas.toBuffer(), "threshold.png")
         return ath
-    };
+    }
 
     async circle(image) {
         const canvas = createCanvas(500, 500);

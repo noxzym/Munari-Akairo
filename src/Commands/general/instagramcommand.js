@@ -35,7 +35,7 @@ module.exports = class InstagramCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { username, nocanvas }) {
         const { delmsg } = await this.client.util
         try {
@@ -161,7 +161,7 @@ module.exports = class InstagramCommand extends Command {
         } catch {
             message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Cannot find that username or the service unavailable")).then(x => { x.delete({ timeout: 10000 }) })
         }
-    };
+    }
 };
 
 function numberformat(num) {

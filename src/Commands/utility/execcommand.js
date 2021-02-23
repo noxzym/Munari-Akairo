@@ -25,7 +25,7 @@ module.exports = class ExecCommand extends Command {
             clientPermissions: ["SEND_MESSAGES"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { code }) {
         if (!code) return;
         message.util.send(`❯_ ${code}`)
@@ -37,7 +37,7 @@ module.exports = class ExecCommand extends Command {
                 for (const page of pages) {
                     await message.channel.send(page, { code: 'bash' })
                 }
-            };
+            }
             if (stderr) {
                 const pages = await pagination(stderr, 1950);
                 for (const page of pages) {

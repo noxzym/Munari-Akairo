@@ -12,7 +12,7 @@ module.exports = class CatCommand extends Command {
                 content: "Giving the random pic of cat",
                 usage: "cat"
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -21,7 +21,7 @@ module.exports = class CatCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const { file } = await fetch("http://aws.random.cat/meow").then(x => x.json());
         const ath = new MessageAttachment(file, "cat.png");
@@ -32,5 +32,5 @@ module.exports = class CatCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
         message.util.send({ embed: e, files: [ath] })
-    };
+    }
 }

@@ -19,7 +19,7 @@ module.exports = class InviteCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         let inviteEmbed = createEmbed("info")
             .setAuthor("Invite Me!")
@@ -28,5 +28,5 @@ module.exports = class InviteCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
         message.channel.send(inviteEmbed);
-    };
+    }
 }

@@ -30,7 +30,7 @@ module.exports = class SnipeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { channelid, all }) {
         const channel = message.guild.channels.cache.get(channelid) || message.mentions.channels.first() || message.channel;
         const snipes = this.client.snipes.get(channel.id);
@@ -41,7 +41,7 @@ module.exports = class SnipeCommand extends Command {
         let send = await message.channel.send(embeds[page])
 
         if (all) return await this.client.util.pagination(send, page, embeds, message, this.client)
-    };
+    }
 };
 
 async function geneembed(snipes, channel) {
@@ -59,6 +59,6 @@ async function geneembed(snipes, channel) {
             .setImage(maping.image)
             .setFooter(`${maping.date} • #${channel.name}`)
         embeds.push(e);
-    };
+    }
     return embeds
 }

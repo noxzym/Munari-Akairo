@@ -16,7 +16,7 @@ module.exports = class VolumeCommand extends Command {
                     match: "content"
                 }
             ],
-            cooldown: 1e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -25,7 +25,7 @@ module.exports = class VolumeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { volume }) {
         const queue = message.guild.queue
         if (!queue) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Nothing music are playng now")).then(x => x.delete({ timeout: 10000 }));
@@ -41,5 +41,5 @@ module.exports = class VolumeCommand extends Command {
         } else {
             message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Please input a valid number between 1 - 100")).then(x => x.delete({ timeout: 10000 }))
         }
-    };
+    }
 };

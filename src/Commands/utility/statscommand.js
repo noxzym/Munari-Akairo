@@ -30,7 +30,7 @@ module.exports = class StatsCommand extends Command {
             clientPermissions: null,
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { lavalink }) {
         if (lavalink) {
             let array = [];
@@ -47,7 +47,7 @@ module.exports = class StatsCommand extends Command {
             let page = 0;
             let embeds = await geneembed(message, array, this.client);
             return await message.channel.send(embeds[page]);
-        };
+        }
 
         await cpuStat.usagePercent(async (err, percent) => {
             if (err) throw err;
@@ -84,7 +84,7 @@ module.exports = class StatsCommand extends Command {
 
             message.channel.send(systemembed)
         })
-    };
+    }
 };
 
 async function geneembed(message, data, client) {
@@ -114,4 +114,4 @@ async function geneembed(message, data, client) {
         array.push(e)
     }
     return array;
-};
+}

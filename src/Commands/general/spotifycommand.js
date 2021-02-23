@@ -36,7 +36,7 @@ module.exports = class SpotifyCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { user, nocanvas }) {
         const { delmsg } = await this.client.util
         const member = message.guild.members.cache.get(user.replace("--nocanvas", "")) || message.mentions.members.first() || message.member
@@ -64,7 +64,7 @@ module.exports = class SpotifyCommand extends Command {
             end = presence.timestamps.end
         } catch {
             return message.inlineReply(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Cannot find spotify presence")).then(x => { x.delete({ timeout: 10000 }) })
-        };
+        }
 
         const duration = end - start;
         const progress = Date.now() - start;
@@ -95,7 +95,7 @@ module.exports = class SpotifyCommand extends Command {
                 .setTimestamp()
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             return message.channel.send(e)
-        };
+        }
         const canvas = createCanvas(1280, 423);
         const ctx = canvas.getContext("2d");
         let hex = await GetColor(img);
@@ -149,7 +149,7 @@ module.exports = class SpotifyCommand extends Command {
 
         var deletit = await message.inlineReply(new MessageAttachment(canvas.toBuffer(), "data.png"));
         await delmsg(deletit, message)
-    };
+    }
 };
 
 async function SpotifyImg(img, path) {
@@ -164,12 +164,12 @@ async function SpotifyImg(img, path) {
             d = await path.join(__dirname, "..", "..", "data", "images", "SpotifyBlack.png");
         } else {
             d = await path.join(__dirname, "..", "..", "data", "images", "SpotifyWhite.png")
-        };
+        }
         return d
     } catch (e) {
         console.log(e)
     }
-};
+}
 
 async function barprogress(img) {
     try {
@@ -183,12 +183,12 @@ async function barprogress(img) {
             d = 255;
         } else {
             d = 0;
-        };
+        }
         return onecolor(`rgb(${d}, ${d}, ${d})`).hex()
     } catch (e) {
         console.log(e)
     }
-};
+}
 
 async function TextColor(img) {
     try {
@@ -202,12 +202,12 @@ async function TextColor(img) {
             d = 0;
         } else {
             d = 255;
-        };
+        }
         return onecolor(`rgb(${d}, ${d}, ${d})`).hex()
     } catch (e) {
         console.log(e)
     }
-};
+}
 
 async function GetColor(img) {
     try {
@@ -221,7 +221,7 @@ async function GetColor(img) {
     } catch (e) {
         if (e) throw Error("Server error")
     }
-};
+}
 
 function fittingString(c, str, maxWidth) {
     let width = c.measureText(str).width;

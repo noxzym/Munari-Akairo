@@ -22,7 +22,7 @@ module.exports = class MangaCommand extends Command {
                 {
                     id: "search",
                     match: "flag",
-                    flag: ["--search", "--find"]
+                    flag: ["--search"]
                 }
             ],
             cooldown: 1e4,
@@ -34,11 +34,11 @@ module.exports = class MangaCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { title, search }) {
         if (!title) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Please input manga title")).then(x => { x.delete({ timeout: 10000 }) })
 
-        const { data } = await get(`https://kitsu.io/api/edge/manga?filter[text]=${encodeURI(title.replace("--search", "").replace("--find", ""))}`, { method: "GET", headers: { 'Content-Type': "application/vnd.api+json", 'Accept': "application/vnd.api+json" } });
+        const { data } = await get(`https://kitsu.io/api/edge/manga?filter[text]=${encodeURI(title.replace("--search", ""))}`, { method: "GET", headers: { 'Content-Type': "application/vnd.api+json", 'Accept': "application/vnd.api+json" } });
         if (data.data.length === 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. 404 Not Found")).then(x => { x.delete({ timeout: 10000 }) })
         var result = await data.data;
 
@@ -72,8 +72,8 @@ module.exports = class MangaCommand extends Command {
                 var resultresponse = await result[parseInt(response.first().content) - 1]
             } catch (e) {
                 message.channel.stopTyping()
-                return message.channel.send(createEmbed("error", 'The request has canceled because no response')).then(x => x.delete({ timeout: 10000 }) && embeds.delete())
-            };
+                return message.channel.send(createEmbed("error", 'The request has canceled because no response')).then(x => x.delete({ timeout: 10000 }))
+            }
 
             const finalresult = await resultresponse;
             const datar = await get(finalresult.relationships.genres.links.related, { method: "GET", headers: { 'Content-Type': "application/vnd.api+json", 'Accept': "application/vnd.api+json" } });
@@ -99,7 +99,7 @@ module.exports = class MangaCommand extends Command {
 
             message.channel.stopTyping()
             return message.channel.send(emcover)
-        };
+        }
         const finalresult = await result[0];
         const datar = await get(finalresult.relationships.genres.links.related, { method: "GET", headers: { 'Content-Type': "application/vnd.api+json", 'Accept': "application/vnd.api+json" } });
         const genre = await datar.data.data.map(({ attributes }) => attributes.name).join(" ");
@@ -123,5 +123,5 @@ module.exports = class MangaCommand extends Command {
             .setTimestamp();
         message.channel.send(emcover)
         message.channel.stopTyping()
-    };
+    }
 }

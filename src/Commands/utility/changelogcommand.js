@@ -20,13 +20,13 @@ module.exports = class ChangelogCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         let page = 0;
         const embed = await geneembed(message, data, this.client);
         let ems = await message.channel.send(embed[page])
         await this.client.util.pagination(ems, page, embed, message, this.client)
-    };
+    }
 };
 async function geneembed(message, data, client) {
     let array = [];
@@ -45,4 +45,4 @@ async function geneembed(message, data, client) {
         array.push(e)
     }
     return array;
-};
+}

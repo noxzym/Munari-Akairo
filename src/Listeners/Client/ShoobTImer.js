@@ -8,7 +8,7 @@ module.exports = class ShoobTimerEvent extends Listener {
             event: "message",
             category: "client",
         })
-    };
+    }
     async exec(message) {
         if (message.channel.type === 'dm') return
         if ((message.guild !== null && !message.guild.me.hasPermission('SEND_MESSAGES'))) return

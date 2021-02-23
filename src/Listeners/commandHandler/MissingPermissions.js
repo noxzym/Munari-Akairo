@@ -7,7 +7,7 @@ module.exports = class MissingPermissions extends Listener {
             emitter: "commandHandler",
             category: "commandHandler"
         })
-    };
+    }
     async exec(message, command, type, missing) {
         if (missing.includes("SEND_MESSAGES")) return;
         if (type === "client") {
@@ -16,5 +16,5 @@ module.exports = class MissingPermissions extends Listener {
             type = message.author.username
         }
         return message.channel.send(`**<a:decline:776412779899781141> | Access Denied. \nMissing Permission for ${type}: \`[${missing}]\`**`).then(x => { x.delete({ timeout: 10000 }) });
-    };
+    }
 };

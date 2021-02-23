@@ -27,7 +27,7 @@ module.exports = class DeepfryCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { parse }) {
         const { image } = new alex(this.client.config.alexapi)
 
@@ -36,7 +36,7 @@ module.exports = class DeepfryCommand extends Command {
             var data = await this.client.util.parsemsg(Util, message, parse);
         } catch {
             return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Invalid Data")).then(x => x.delete({ timeout: 10000 }));
-        };
+        }
 
         const img = await image.deepfry({ image: data })
         let ath = new MessageAttachment(img, "deepfry.png")
@@ -46,5 +46,5 @@ module.exports = class DeepfryCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
         message.channel.send({ files: [ath], embed: e })
-    };
+    }
 }

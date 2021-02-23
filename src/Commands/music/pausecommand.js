@@ -10,7 +10,7 @@ module.exports = class PauseCommand extends Command {
                 content: "Pauses current playback",
                 usage: "pause"
             },
-            cooldown: 1e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -19,7 +19,7 @@ module.exports = class PauseCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const queue = message.guild.queue;
         if (!queue) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Nothing music are playng now")).then(x => x.delete({ timeout: 10000 }));
@@ -31,5 +31,5 @@ module.exports = class PauseCommand extends Command {
 
         await this.client.shoukaku.pause(message);
         return message.channel.send(createEmbed("info", `**The current song has been paused by \`${message.author.username}\`**`));
-    };
+    }
 };

@@ -1,4 +1,5 @@
 const { Command } = require("discord-akairo");
+const { createEmbed } = require("../../Utils/CreateEmbed");
 const { MessageAttachment } = require('discord.js');
 
 module.exports = class SayCommand extends Command {
@@ -25,7 +26,7 @@ module.exports = class SayCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { content }) {
         (message.guild.me.hasPermission("MANAGE_MESSAGES") || message.channel.permissionsFor(this.client.user).has('MANAGE_MESSAGES')) ? message.delete() : null
         if (!content && message.attachments.first() === undefined) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No message given")).then(x => { x.delete({ timeout: 10000 }) });
@@ -40,5 +41,5 @@ module.exports = class SayCommand extends Command {
         } else {
             return message.channel.send(content);
         }
-    };
+    }
 }

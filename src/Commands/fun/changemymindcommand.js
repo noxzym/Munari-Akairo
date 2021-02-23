@@ -26,7 +26,7 @@ module.exports = class ChangemymindCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { content }) {
         if (!content) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
         if (content.length > 20) return message.channel.send(createEmbed("error", "maximum length of text is 20")).then(msg => { msg.delete({ timeout: 10000 }) });
@@ -39,5 +39,5 @@ module.exports = class ChangemymindCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
         message.channel.send({ files: [ath], embed: e })
-    };
+    }
 };

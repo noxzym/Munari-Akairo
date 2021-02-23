@@ -27,7 +27,7 @@ module.exports = class UserinfoCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { user }) {
         const member =
             message.guild.member(user) ||
@@ -54,5 +54,5 @@ module.exports = class UserinfoCommand extends Command {
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp()
         message.channel.send(e)
-    };
+    }
 }

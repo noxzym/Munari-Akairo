@@ -28,7 +28,7 @@ module.exports = class EmojiCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { emoji }) {
         if (!emoji) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => { x.delete({ timeout: 10000 }) })
 
@@ -45,5 +45,5 @@ module.exports = class EmojiCommand extends Command {
             .setDescription(`**Name: \`${name}\`\nID: \`${ID}\`\nAnimated: \`${animated}\`\nIdentifier: \`${information}\`\nCreatedAt: \`${createdAt}\`**`)
             .setImage(image)
         message.channel.send(e)
-    };
+    }
 }

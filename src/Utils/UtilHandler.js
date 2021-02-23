@@ -5,18 +5,17 @@ module.exports = class UtilHandler {
     constructor(client) {
         this.client = client;
         this.canvas = new CanvasHandler(client);
-    };
+    }
 
     /*Function*/
     async parseMs(value) {
         if (isNaN(value)) return;
         return prettyMilliseconds(value, { verbose: true, compact: false, secondsDecimalDigits: 0 })
-    };
+    }
     async progressbar(total, current, size = 40, line = '▬', slider = '🔘') {
-        var bar, calculated
+        var bar
         if (current > total) {
             bar = line.repeat(size + 2);
-            const percentage = (current / total) * 100;
         } else {
             const percentage = current / total;
             const progress = Math.round((size * percentage));
@@ -24,10 +23,9 @@ module.exports = class UtilHandler {
             const progressText = line.repeat(progress).replace(/.$/, slider);
             const emptyProgressText = line.repeat(emptyProgress);
             bar = progressText + emptyProgressText;
-            calculated = percentage * 100;
-        };
+        }
         return bar
-    };
+    }
     async parsemsg(Util, message, args) {
         const parse = message.content.trim().split(" ");
         const parsedata = parse[1] !== undefined && parse[1].includes("^") ? parse[1].length : 0;
@@ -46,7 +44,7 @@ module.exports = class UtilHandler {
         }
         const data = fetchattachment || fetchembeds || fetchmsgauthor || fetchemojimsg || mentionuser || mentionuserid || fetchavatarauthor;
         return data
-    };
+    }
     async delmsg(send, msg) {
         const emo = ["🇽"];
         for (const emoji of emo) await send.react(emoji);
@@ -62,7 +60,7 @@ module.exports = class UtilHandler {
                     break;
             }
         })
-    };
+    }
     async pagination(send, page, datae, message) {
         const emo = ["🇽", "⏪", "⬅️", "➡️", "⏩", "⏹️"];
         for (const emoji of emo) await send.react(emoji);
@@ -113,5 +111,5 @@ module.exports = class UtilHandler {
             }
         })
         return collector
-    };
+    }
 }

@@ -19,7 +19,7 @@ module.exports = class PingCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         let latency = Math.round(new Date() - message.createdTimestamp)
         let websocket = this.client.ws.ping

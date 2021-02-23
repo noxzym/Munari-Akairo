@@ -25,7 +25,7 @@ module.exports = class TextblockCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { content }) {
         if (!content) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Please provide text")).then(x => x.delete({ tineout: 10000 }));
         const input = content
@@ -43,5 +43,5 @@ module.exports = class TextblockCommand extends Command {
             .replace(/9/g, ":nine:")
             .replace(/0/g, ":zero:");
         message.channel.send(input)
-    };
+    }
 };

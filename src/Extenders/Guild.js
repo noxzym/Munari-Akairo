@@ -4,6 +4,6 @@ Structures.extend("Guild", Guild => {
         constructor(client, data) {
             super(client, data)
             this.queue = null
-        };
+        }
     }
 });

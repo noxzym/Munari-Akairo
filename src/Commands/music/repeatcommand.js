@@ -10,7 +10,7 @@ module.exports = class RepeatCommand extends Command {
                 content: "Repeating the music queue",
                 usage: "repeat"
             },
-            cooldown: 1e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -19,7 +19,7 @@ module.exports = class RepeatCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const queue = message.guild.queue;
         if (!queue) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Nothing music are playng now")).then(x => x.delete({ timeout: 10000 }));
@@ -29,5 +29,5 @@ module.exports = class RepeatCommand extends Command {
 
         await this.client.shoukaku.repeat(message);
         return message.channel.send(createEmbed("info", `**Loop mode has been set to \`${queue.loop ? "on" : "off"}\`**`)).then(x => x.delete({ timeout: 10000 }));
-    };
+    }
 };

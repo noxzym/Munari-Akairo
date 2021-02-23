@@ -26,14 +26,14 @@ module.exports = class GreyCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { parse }) {
         if (!parse) parse = message
         try {
             var data = await this.client.util.parsemsg(Util, message, parse);
         } catch {
             return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Invalid Data")).then(x => x.delete({ timeout: 10000 }));
-        };
+        }
 
         var bufferdata = await this.client.util.canvas.greyscale(data);
         const img = new MessageAttachment(bufferdata, "greyscale.png");
@@ -42,5 +42,5 @@ module.exports = class GreyCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
         message.channel.send({ files: [img], embed: e })
-    };
+    }
 }

@@ -27,7 +27,7 @@ module.exports = class MagikCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { parse }) {
         const { image } = new alex(this.client.config.alexapi);
 
@@ -46,5 +46,5 @@ module.exports = class MagikCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
         message.channel.send({ files: [ath], embed: e })
-    };
+    }
 }

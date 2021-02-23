@@ -12,7 +12,7 @@ module.exports = class RacoonCommand extends Command {
                 content: "Giving the random pic of racoom",
                 usage: "racoon"
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -21,7 +21,7 @@ module.exports = class RacoonCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const { image } = await fetch("https://some-random-api.ml/animal/racoon").then(x => x.json());
         const ath = new MessageAttachment(image, "racoon.png");
@@ -32,5 +32,5 @@ module.exports = class RacoonCommand extends Command {
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.util.send({ embed: e, files: [ath] })
-    };
+    }
 }

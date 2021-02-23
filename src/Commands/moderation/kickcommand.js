@@ -25,7 +25,7 @@ module.exports = class KickCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "KICK_MEMBERS"],
             userPermissions: ["KICK_MEMBERS"],
         })
-    };
+    }
     async exec(message, { parse }) {
         const member =
             message.guild.members.cache.get(parse) ||
@@ -39,7 +39,7 @@ module.exports = class KickCommand extends Command {
         }
         else {
             reason = `${reason}`
-        };
+        }
 
         try {
             if (message.guild.me.roles.highest.comparePositionTo(member.roles.highest) < 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. My highest role is lower than the member highest role")).then(msg => { msg.delete({ timeout: 10000 }) })
@@ -60,5 +60,5 @@ module.exports = class KickCommand extends Command {
         } catch (e) {
             return message.channel.send(createEmbed("error", `Sorry i couldn't kick this user because \`\`\`js\n${e.message}\n\`\`\``)).then(msg => { msg.delete({ timeout: 10000 }) })
         }
-    };
+    }
 }

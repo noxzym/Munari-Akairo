@@ -8,7 +8,7 @@ const ytdl = require("ytdl-core");
 module.exports = class PlayerHandler {
     constructor(client) {
         this.client = client
-    };
+    }
 
     async leave(message) {
         const data = message.guild.queue;
@@ -20,30 +20,30 @@ module.exports = class PlayerHandler {
         const data = message.guild.queue;
         data.songs = []
         data.connection.dispatcher.end();
-    };
+    }
 
     async setVolume(message, value) {
         const data = message.guild.queue;
         data.volume = value;
         data.connection.dispatcher.setVolume(value / 100);
-    };
+    }
 
     async skip(message) {
         const data = message.guild.queue;
         data.connection.dispatcher.end();
-    };
+    }
 
     async pause(message) {
         const data = message.guild.queue;
         await data.connection.dispatcher.pause(true);
         data.playing = false
-    };
+    }
 
     async resume(message) {
         const data = message.guild.queue;
         await data.connection.dispatcher.resume(true);
         data.playing = true
-    };
+    }
 
     async getSongs(data) {
         const videoPattern = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?/
@@ -70,7 +70,7 @@ module.exports = class PlayerHandler {
                 thumbnail: datasong.thumbnail + "?size=4096",
             });
             return songdata
-        };
+        }
 
         if (playlistPattern.test(data)) {
             const songdata = [];
@@ -90,7 +90,7 @@ module.exports = class PlayerHandler {
                 })
             }
             return songdata;
-        };
+        }
 
         if (spotifyregex.test(data)) {
             const input = data.match(spotifyregex);
@@ -115,7 +115,7 @@ module.exports = class PlayerHandler {
                 });
                 return songdata;
             } else if (input[1] === "playlist") {
-                return;
+                return;/*
                 const songdata = [];
                 const datar = await getTracks(data);
                 const getdata = await Promise.all(datar.map(({ album }) => album).map(x => datayt(`${x.name} - ${x.artists.map(x => x.name)}`)));
@@ -131,9 +131,9 @@ module.exports = class PlayerHandler {
                         thumbnail: x.thumbnail + "?size=4096",
                     })
                 });
-                return songdata;
+                return songdata;*/
             } else return;
-            async function datayt(x) {
+            /*async function datayt(x) {
                 const ytget = await yts.search(x);
                 let filter = [
                     "video",
@@ -141,9 +141,9 @@ module.exports = class PlayerHandler {
                 ];
                 const data = ytget.all.filter(x => filter.includes(x.type))[0];
                 return data
-            };
-        };
-    };
+            }*/
+        }
+    }
 
     async play(song, message) {
         const queue = message.guild.queue
@@ -166,7 +166,7 @@ module.exports = class PlayerHandler {
                 dispatcher = queue.connection.play(await erityt(song.url, { filter: 'audioonly', quality: 'highestaudio', highWaterMark: 1 << 25, bitrate: 96000 }), { type: "opus" })
             } else {
                 dispatcher = queue.connection.play(song.url, { bitrate: 96000 })
-            };
+            }
 
             dispatcher.on("finish", () => {
                 if (queue.loop) {
@@ -208,5 +208,5 @@ module.exports = class PlayerHandler {
             await message.guild.me.voice.channel.leave()
             return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. I got the error: ${e.message}`))
         }
-    };
+    }
 }

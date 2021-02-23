@@ -25,7 +25,7 @@ module.exports = class NukeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "MANAGE_CHANNELS"],
             userPermissions: ["MANAGE_CHANNELS"],
         })
-    };
+    }
     async exec(message, { parse }) {
         const channel = message.guild.channels.cache.get(parse) || message.mentions.channels.first();
         if (!channel) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Please mention channel first")).then(x => { x.delete({ timeout: 10000 }) });
@@ -43,7 +43,7 @@ module.exports = class NukeCommand extends Command {
                 switch (reaction.emoji.name) {
                     case "✅":
                         reaction.users.remove(user);
-                        react.edit(createEmbed("spotify", `<a:yes:765207711423004676> | Nuke Channel **\`${channel.name}\`** successful!`)).then(X => { x.delete({ timeout: 3000 }) })
+                        react.edit(createEmbed("spotify", `<a:yes:765207711423004676> | Nuke Channel **\`${channel.name}\`** successful!`)).then(x => { x.delete({ timeout: 3000 }) })
                         channel.clone().then(x => {
                             message.guild.channels.cache.get(x.id).send(createEmbed("info").setAuthor(`Nothing in here, Nuke command successful!`, this.client.user.avatarURL()).setImage("https://cdn.discordapp.com/attachments/795512730940735508/801765196989071390/explosion.gif").setTimestamp().setFooter(`Commanded by: ${message.author.tag}`, this.client.user.avatarURL({ dynamic: true }))).then(x => { x.delete({ timeout: 10000 }) })
                         })
@@ -73,5 +73,5 @@ module.exports = class NukeCommand extends Command {
             react.reactions.removeAll();
             return message.channel.activateCollector = false
         }
-    };
+    }
 }

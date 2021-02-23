@@ -12,7 +12,7 @@ module.exports = class DogCommand extends Command {
                 content: "Givinig the random pic of dog",
                 usage: "dog"
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -21,7 +21,7 @@ module.exports = class DogCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(msg) {
         const { message } = await fetch("https://dog.ceo/api/breeds/image/random").then(x => x.json());
         const ath = new MessageAttachment(message, "dog.png");
@@ -32,5 +32,5 @@ module.exports = class DogCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${msg.author.tag}`, msg.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
         msg.util.send({ embed: e, files: [ath] });
-    };
+    }
 }

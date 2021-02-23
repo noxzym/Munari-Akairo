@@ -24,10 +24,10 @@ module.exports = class x extends Command {
             clientPermissions: null,
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
 
-    };
+    }
 };
 
 const { Listener } = require("discord-akairo");
@@ -39,7 +39,7 @@ module.exports = class x extends Listener {
             event: "",
             category: "",
         })
-    };
+    }
     async exec() {
         
     }

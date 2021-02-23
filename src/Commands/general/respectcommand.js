@@ -27,7 +27,7 @@ module.exports = class RespectCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { thing }) {
         let data
         if (thing) {
@@ -75,5 +75,5 @@ module.exports = class RespectCommand extends Command {
     } catch {
             message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. I got some error")).then(x => { x.delete({ timeout: 10000 }) });
     }
-    };
+    }
 }

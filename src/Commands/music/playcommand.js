@@ -23,7 +23,7 @@ module.exports = class PlayCommand extends Command {
                     flag: ["--search"]
                 }
             ],
-            cooldown: 1.5e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: true,

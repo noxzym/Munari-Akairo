@@ -19,7 +19,7 @@ module.exports = class ReloadCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         var send = await message.channel.send(createEmbed("info", `<a:loading:804201332243955734> | Realoading command...`))
         try {
@@ -30,5 +30,5 @@ module.exports = class ReloadCommand extends Command {
             console.log(e);
             send.edit(createEmbed("error", `Operation Failed. Because: \n\`\`\`js${e.stack}\`\`\``)).then(x => { x.delete({ timeout: 10000 }) });
         }
-    };
+    }
 }

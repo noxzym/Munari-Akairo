@@ -25,7 +25,7 @@ module.exports = class MockingCaseCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { content }) {
         if (!content) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
         const after = await mocker(content, () => Math.round(Math.random()));
@@ -38,7 +38,7 @@ module.exports = class MockingCaseCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, format: "png", size: 4096 }))
         message.channel.send(e)
-    };
+    }
 };
 async function mocker(data, randomize) {
     return data.replace(/./g, (str, i) => (randomize(str, i) ? str.toUpperCase() : str.toLowerCase()));

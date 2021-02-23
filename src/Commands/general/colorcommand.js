@@ -27,7 +27,7 @@ module.exports = class ColorCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { color }) {
         const { others } = new alex(this.client.config.alexapi)
         if (!color) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => { x.delete({ timeout: 10000 }) });
@@ -55,5 +55,5 @@ module.exports = class ColorCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
         message.channel.send({ embed: e, files: [ath] });
-    };
+    }
 }

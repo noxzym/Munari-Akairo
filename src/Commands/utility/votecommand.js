@@ -20,7 +20,7 @@ module.exports = class VoteCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         let ath = new MessageAttachment('https://top.gg/api/widget/740112353483554858.png', 'topgg.png')
         let topgg = await this.client.dbl.getBot("740112353483554858").then(x => x.monthlyPoints)
@@ -32,5 +32,5 @@ module.exports = class VoteCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
         message.channel.send({ files: [ath], embed: e })
-    };
+    }
 }

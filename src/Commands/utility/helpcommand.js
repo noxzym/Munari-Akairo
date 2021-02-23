@@ -25,7 +25,7 @@ module.exports = class HelpCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { command }) {
         const prefix = this.handler.prefix;
         const totalcmd = this.handler.categories.map(x => x.size).reduce((a, b) => b + a)
@@ -45,7 +45,7 @@ module.exports = class HelpCommand extends Command {
                 .setThumbnail(this.client.user.displayAvatarURL())
                 .setFooter(`ℹ️ Don't include <> or []. It's mean, <> is required and [] is optional`)
             return message.util.send(e)
-        };
+        }
 
         const action = this.handler.categories.filter(x => x.id === "Action").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
         const animal = this.handler.categories.filter(x => x.id === "Animal").first().filter(x => x.aliases.length > 0).map(x => `**\`${x.aliases[0]}\`**`).join(", ");
@@ -72,5 +72,5 @@ module.exports = class HelpCommand extends Command {
             .addField("\`🛠️\`| Utility", Utility)
             .addField('\u200b', "**Quick Links:【[Vote me](https://top.gg/bot/740112353483554858/vote)】 • 【[Invite me](https://discord.com/oauth2/authorize?client_id=740112353483554858&scope=bot&permissions=2146827639)】**")
         return message.util.send(e)
-    };
+    }
 }

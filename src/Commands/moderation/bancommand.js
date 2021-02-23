@@ -25,7 +25,7 @@ module.exports = class BanCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"],
         })
-    };
+    }
     async exec(message, { parse }) {
         const member =
             message.guild.members.cache.get(parse) ||
@@ -41,7 +41,7 @@ module.exports = class BanCommand extends Command {
         }
         else {
             reason = `${reason}`
-        };
+        }
 
         try {
             if (member.user !== undefined) {
@@ -50,7 +50,7 @@ module.exports = class BanCommand extends Command {
                 if (!member.bannable) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. This user is not bannable")).then(msg => { msg.delete({ timeout: 10000 }) })
                 if (member.user.id === message.author.id) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. You can't ban yourself")`You can't kicked yourself`).then(msg => { msg.delete({ timeout: 10000 }) })
                 if (member.user.id === this.client.user.id) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. I can't ban myself")).then(msg => { msg.delete({ timeout: 10000 }) })
-            };
+            }
 
             var tag;
             var id;
@@ -78,5 +78,5 @@ module.exports = class BanCommand extends Command {
         } catch (e) {
             return message.channel.send(createEmbed("error", `Sorry i couldn't ban this user because \`\`\`js\n${e.message}\n\`\`\``)).then(msg => { msg.delete({ timeout: 10000 }) })
         }
-    };
+    }
 }

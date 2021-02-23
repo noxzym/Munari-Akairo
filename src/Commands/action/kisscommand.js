@@ -27,7 +27,7 @@ module.exports = class KissCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { parse }) {
         const member =
             message.guild.members.cache.get(parse) ||
@@ -44,7 +44,7 @@ module.exports = class KissCommand extends Command {
                 .setTimestamp()
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
             return message.channel.send({ files: [ath], embed: e });
-        };
+        }
 
         const e = createEmbed("info")
             .setTitle(`${member.user.username} has been Kissed by ${message.author.username}`)
@@ -52,5 +52,5 @@ module.exports = class KissCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
         message.channel.send({ files: [ath], embed: e });
-    };
+    }
 }

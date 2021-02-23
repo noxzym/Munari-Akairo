@@ -26,7 +26,7 @@ module.exports = class SlowmodeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "MANAGE_CHANNELS"],
             userPermissions: ["MANAGE_CHANNELS"],
         })
-    };
+    }
     async exec(message, { parse }) {
         const channel = message.guild.channels.cache.get(parse.split(" ")[0]) || message.mentions.channels.first();
         if (!channel) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please provide channel first`)).then(x => { x.delete({ timeout: 10000 }) });
@@ -41,5 +41,5 @@ module.exports = class SlowmodeCommand extends Command {
 
         await channel.setRateLimitPerUser(number);
         message.channel.send(createEmbed("spotify", `<a:yes:765207711423004676> | Set ratelimit Channel **\`${channel.name}\`** for **\`${nums}\`** successful!`)).then(x => { x.delete({ timeout: 10000 }) })
-    };
+    }
 }

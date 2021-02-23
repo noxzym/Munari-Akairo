@@ -12,7 +12,7 @@ module.exports = class BirdCommand extends Command {
                 content: "Giving the random pic of bird",
                 usage: "bird"
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -21,7 +21,7 @@ module.exports = class BirdCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const data = await fetch("https://shibe.online/api/birds").then(x => x.json());
         const ath = new MessageAttachment(data.join(" "), "bird.png");
@@ -32,5 +32,5 @@ module.exports = class BirdCommand extends Command {
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.util.send({ embed: e, files: [ath] })
-    };
+    }
 }

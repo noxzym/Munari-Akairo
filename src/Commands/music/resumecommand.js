@@ -10,7 +10,7 @@ module.exports = class ResumeCommand extends Command {
                 content: "Resume the current playback",
                 usage: "resume"
             },
-            cooldown: 1e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -19,7 +19,7 @@ module.exports = class ResumeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const queue = message.guild.queue;
         if (!queue) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Nothing music are playng now")).then(x => x.delete({ timeout: 10000 }));
@@ -31,5 +31,5 @@ module.exports = class ResumeCommand extends Command {
 
         await this.client.shoukaku.resume(message);
         return message.channel.send(createEmbed("info", `**The current song has been resume by \`${message.author.username}\`**`));
-    };
+    }
 };

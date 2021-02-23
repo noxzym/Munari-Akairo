@@ -21,7 +21,7 @@ module.exports = class TotalcodeCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         glob("src/**/*.js", async (e, f) => {
             if (e) throw e;
@@ -37,11 +37,11 @@ module.exports = class TotalcodeCommand extends Command {
                 if (data > j) {
                     j = data;
                     l = x.slice((x.lastIndexOf("/") - 1 >>> 0) + 2);
-                };
+                }
                 if (str.length > k) {
                     k = str.length;
                     m = x.slice((x.lastIndexOf("/") - 1 >>> 0) + 2)
-                };
+                }
                 return null;
             }));
 
@@ -60,5 +60,5 @@ module.exports = class TotalcodeCommand extends Command {
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
             message.channel.send(muah)
         })
-    };
+    }
 }

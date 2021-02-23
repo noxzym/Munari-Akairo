@@ -26,7 +26,7 @@ module.exports = class SepiaCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { parse }) {
         if (!parse) parse = message
         try {
@@ -42,5 +42,5 @@ module.exports = class SepiaCommand extends Command {
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096 }))
         message.channel.send({ files: [ath], embed: e })
-    };
+    }
 }

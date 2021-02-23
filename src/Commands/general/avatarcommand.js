@@ -30,7 +30,7 @@ module.exports = class AvatarCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { server, user }) {
         if (server) {
             let e = createEmbed("info")
@@ -39,7 +39,7 @@ module.exports = class AvatarCommand extends Command {
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
                 .setTimestamp();
             return message.channel.send(e)
-        };
+        }
         let member =
             message.guild.members.cache.get(user) ||
             message.guild.members.cache.find(x => x.user.username.toLowerCase() === `${user === null ? message.author.username : user}` || x.user.username === `${user === null ? message.author.username : user}`) ||
@@ -52,5 +52,5 @@ module.exports = class AvatarCommand extends Command {
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.channel.send(e)
-    };
+    }
 }

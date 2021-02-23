@@ -10,7 +10,7 @@ module.exports = class QueueCommand extends Command {
                 content: "View all music list",
                 usage: "queue"
             },
-            cooldown: 1e4,
+            cooldown: 5e3,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -19,7 +19,7 @@ module.exports = class QueueCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message) {
         const queue = message.guild.queue;
         if (!queue) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Nothing music are playng now")).then(x => x.delete({ timeout: 10000 }));
@@ -28,7 +28,7 @@ module.exports = class QueueCommand extends Command {
         let page = 0;
         var embed = await message.channel.send(embeds[page])
         await this.client.util.pagination(embed, page, embeds, message)
-    };
+    }
 };
 async function geneembed(message, queue) {
     const embeds = [];

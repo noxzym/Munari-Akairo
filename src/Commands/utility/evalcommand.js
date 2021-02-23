@@ -42,7 +42,7 @@ module.exports = class EvalCommand extends Command {
             clientPermissions: ["SEND_MESSAGES"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { code, async, silent, asilent }) {
         const { delmsg } = this.client.util
         let codein = code
@@ -74,7 +74,7 @@ module.exports = class EvalCommand extends Command {
             }
 
             var outputcode = util.inspect(coder, { depth: 0 });
-            var output;
+            let output;
             if (outputcode.length > 1024) {
                 const { body } = await req.post('https://paste.mod.gg/documents').send(outputcode)
                 output = await message.channel.send([
@@ -89,7 +89,7 @@ module.exports = class EvalCommand extends Command {
             await delmsg(output, message)
 
         } catch (error) {
-            var output;
+            let output;
 
             if (error.length > 1024) {
                 const { body } = await req.post('https://paste.mod.gg/documents').send(error)
@@ -114,4 +114,4 @@ function clean(text) {
             .replace(/`/g, "`" + String.fromCharCode(8203))
             .replace(/@/g, "@" + String.fromCharCode(8203));
     else return text;
-};
+}

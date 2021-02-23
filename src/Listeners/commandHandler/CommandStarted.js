@@ -7,8 +7,8 @@ module.exports = class CommandStarted extends Listener {
             emitter: "commandHandler",
             category: "commandHandler"
         })
-    };
+    }
     async exec(message, command) {
         console.log(`${message.author.tag} •> ${command.id} <•> ${message.guild.name} <•> #${message.channel.name}`)
-    };
+    }
 };

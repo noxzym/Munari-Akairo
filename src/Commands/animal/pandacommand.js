@@ -3,16 +3,16 @@ const { MessageAttachment } = require("discord.js");
 const { createEmbed } = require("../../Utils/CreateEmbed");
 const fetch = require("node-fetch");
 
-module.exports = class KoalaCommand extends Command {
+module.exports = class PandaCommand extends Command {
     constructor() {
-        super("KoalaCommand", {
-            aliases: ["koala"],
+        super("PandaCommand", {
+            aliases: ["panda"],
             category: "Animal",
             description: {
-                content: "Giving the random pic of koala",
-                usage: "koala"
+                content: "Giving the random pic of panda",
+                usage: "panda"
             },
-            cooldown: 1.5e4,
+            cooldown: 1e4,
             channel: "guild",
             ownerOnly: false,
             editable: false,
@@ -23,12 +23,12 @@ module.exports = class KoalaCommand extends Command {
         })
     }
     async exec(message) {
-        const { image } = await fetch("https://some-random-api.ml/animal/koala").then(x => x.json());
-        const ath = new MessageAttachment(image, "koala.png");
+        const { image } = await fetch("https://some-random-api.ml/animal/panda").then(x => x.json());
+        const ath = new MessageAttachment(image, "panda.png");
 
         let e = createEmbed("info")
-            .setAuthor(`🦝| This is your koala ${message.author.username}`)
-            .setImage("attachment://koala.png")
+            .setAuthor(`🐼| This is your panda ${message.author.username}`)
+            .setImage("attachment://panda.png")
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.util.send({ embed: e, files: [ath] })
