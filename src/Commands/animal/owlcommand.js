@@ -24,11 +24,12 @@ module.exports = class OwlCommand extends Command {
     }
     async exec(message) {
         const { image } = await fetch("http://pics.floofybot.moe/owl").then(x => x.json());
-        const ath = new MessageAttachment(image, "owl.png");
+        const format = await image.slice((image.lastIndexOf(".") - 1 >>> 0) + 1);
+        const ath = new MessageAttachment(image, `owl.${format}`);
 
         let e = createEmbed("info")
             .setAuthor(`🦉| This is your owl ${message.author.username}`)
-            .setImage("attachment://owl.png")
+            .setImage(`attachment://owl.${format}`)
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         message.util.send({ embed: e, files: [ath] })
