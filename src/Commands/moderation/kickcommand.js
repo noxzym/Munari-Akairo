@@ -22,7 +22,7 @@ module.exports = class KickCommand extends Command {
             editable: false,
             typing: true,
             quoted: false,
-            clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "BAN_MEMBERS"],
+            clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "KICK_MEMBERS"],
             userPermissions: ["KICK_MEMBERS"],
         })
     };
