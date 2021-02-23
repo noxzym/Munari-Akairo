@@ -32,14 +32,14 @@ module.exports = class PlayCommand extends Command {
             clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
             userPermissions: null,
         })
-    };
+    }
     async exec(message, { search, flags }) {
         const { channel } = message.member.voice;
         if (!channel) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Please join voice channel first")).then(x => x.delete({ tineout: 10000 }));
         if (!search) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
 
         const queue = message.guild.queue;
-        const data = await this.client.shoukaku.getSongs(search.replace("--search", "").replace("--find", ""));
+        var data = await this.client.shoukaku.getSongs(search.replace("--search", "").replace("--find", ""));
         if (!data || data.tracks.length === 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Can't get song data")).then(x => x.delete({ timeout: 10000 }));
 
         var queueConstruct = {
@@ -58,11 +58,11 @@ module.exports = class PlayCommand extends Command {
             const trackpl = await data.tracks.slice(0, 50);
             if (queue) {
                 for (let i = 0; i < trackpl.length; i++) {
-                    const skip = 0;
+                    let skip = 0;
                     if (trackpl[i].info.isStream) {
                         skip++;
                         return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
-                    };
+                    }
                     queue.songs.push({
                         track: trackpl[i].track,
                         seekable: trackpl[i].info.isSeekable,
@@ -75,15 +75,15 @@ module.exports = class PlayCommand extends Command {
                         thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
                         requester: message.author
                     });
-                };
+                }
                 message.util.send(createEmbed("info", `**Playlist \`${Util.escapeMarkdown(await data.playlistName)}\` has been added to Queue**`).setThumbnail(`https://i.ytimg.com/vi/${await data.tracks[0].info.identifier}/hqdefault.jpg`));
             } else {
                 for (let i = 0; i < trackpl.length; i++) {
-                    const skip = 0;
+                    let skip = 0;
                     if (trackpl[i].info.isStream) {
                         skip++;
                         return message.channel.send(createEmbed("info", `**\`${skip}\`** Songs has been skipped because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
-                    };
+                    }
                     queueConstruct.songs.push({
                         track: trackpl[i].track,
                         seekable: trackpl[i].info.isSeekable,
@@ -96,7 +96,7 @@ module.exports = class PlayCommand extends Command {
                         thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
                         requester: message.author
                     });                   
-                };
+                }
                 message.util.send(createEmbed("info", `**Playlist \`${Util.escapeMarkdown(await data.playlistName)}\` has been added to Queue**`).setThumbnail(`https://i.ytimg.com/vi/${await data.tracks[0].info.identifier}/hqdefault.jpg`));
             }
         } else {
@@ -122,14 +122,14 @@ module.exports = class PlayCommand extends Command {
                         if (input === 'cancel' || input === 'c') {
                             message.util.edit(createEmbed("error", `<a:no:765207855506522173> | Request canceled`))
                             return embedsearch.delete({ timeout: 10000 })
-                        };
+                        }
                         embedsearch.delete()
                         const videoIndex = parseInt(response.first().content);
                         var video = await data.tracks[videoIndex - 1];
                     } catch (e) {
                         console.log(e)
                         return message.channel.send(createEmbed("error", "The request has been canceled because no respond!")).then(x => x.delete({ timeout: 10000 }));
-                    };
+                    }
                     if (video.info.isStream) return message.channel.send(createEmbed("info", `Cannot playing this song because the song type is streaming`)).then(x => x.delete({ timeout: 10000 }));
                     song = {
                         track: video.track,
@@ -163,11 +163,11 @@ module.exports = class PlayCommand extends Command {
                         console.log(e)
                         return message.channel.send(createEmbed("error", "The request has been canceled because no respond!")).then(x => x.delete({ timeout: 10000 }));
                     }
-                };
+                }
 
                 if (queue ? queue.songs.length !== 0 && queue.songs.map(x => x.identifier).filter(x => song.identifier.includes(x)).map(x => x === song.identifier).join() === 'true' : undefined) {
                     return message.channel.send(createEmbed("error", `🚫 | Sorry, this song is already in the queue.`)).then(msg => { msg.delete({ timeout: 10000 }); });
-                };
+                }
 
                 if (queue) {
                     queue.songs.push(song);
@@ -179,8 +179,8 @@ module.exports = class PlayCommand extends Command {
 
             } catch (e) {
                 message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Cannot got song data`)).then(msg => { msg.delete({ timeout: 8000 }); });
-            };
-        };
+            }
+        }
 
         if (!queue) {
             try {
@@ -196,5 +196,5 @@ module.exports = class PlayCommand extends Command {
                 message.channel.send(createEmbed("error", `Operation Canceled. Because: ${e.message}`))
             }
         }
-    };
+    }
 };

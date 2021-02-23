@@ -13,30 +13,31 @@ module.exports = class ShoukakuHandler {
     constructor(client) {
         this.client = client;
         this.manager = new Shoukaku(client, LavalinkServer, ShoukakuOptions);
-    };
+    }
     async repeat(message) {
         message.guild.queue.loop = !message.guild.queue.loop;
-    };
+    }
     async skip(message) {
         message.guild.queue.player.stopTrack();
-    };
+    }
     async stop(message) {
+        this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
         message.guild.queue.player.stopTrack();
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
-    };
+    }
     async leave(message) {
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
-    };
+    }
     async pause(message) {
         message.guild.queue.player.setPaused(true);
         message.guild.queue.playing = false;
-    };
+    }
     async resume(message) {
         message.guild.queue.player.setPaused(false);
         message.guild.queue.playing = true;
-    };
+    }
     async setVolume(message, volume) {
         message.guild.queue.player.setVolume(volume/100);
         message.guild.queue.volume = volume;
@@ -71,16 +72,16 @@ module.exports = class ShoukakuHandler {
                 const node = lavasfy.nodes.get(this.manager.getNode().name);
                 const load = await node.load(data.link);
                 return load;
-            };
+            }
         } else if (option === undefined) {
-            const load = await node.rest.resolve(query, "youtube");
+            let load = await node.rest.resolve(query, "youtube");
             if (!load) load = await node.rest.resolve(query, "youtubemusic");
             return load
         } else {
             const load = await node.rest.resolve(query, option);
             return load;
         }
-    };
+    }
 
     async play(track, message) {
         try {

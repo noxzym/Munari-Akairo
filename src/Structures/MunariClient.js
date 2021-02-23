@@ -27,7 +27,7 @@ module.exports = class MunariClient extends AkairoClient {
                 restTimeOffset: 0,
                 ws: {
                     intents: [
-                        Intents.FLAGS.GUILDS,
+                        "GUILDS",
                         "GUILD_BANS",
                         "GUILD_EMOJIS",
                         "GUILD_VOICE_STATES",
