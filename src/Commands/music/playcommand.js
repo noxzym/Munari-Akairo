@@ -20,7 +20,7 @@ module.exports = class PlayCommand extends Command {
                 {
                     id: "flags",
                     match: "flag",
-                    flag: ["--search", "--find"]
+                    flag: ["--search"]
                 }
             ],
             cooldown: 1.5e4,
