@@ -69,8 +69,8 @@ module.exports = class MunariClient extends AkairoClient {
         this.snipes = new Map();
     }
     async start() {
-        this._setupMongoose();
         this._setupShoukakuEvents();
+        this._setupMongoose();
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
             commandHandler: this.commandHandler,
@@ -82,14 +82,14 @@ module.exports = class MunariClient extends AkairoClient {
         return super.login("NzQwMTEyMzUzNDgzNTU0ODU4.XykRVw.tSkdflj2vTo5eOYWgAW4Hm6RltQ")
         // return super.login('NzkxMjcxMjIzMDc3MTA5ODIw.X-MuwA.XTpdWsnWaAt3Qm7qGqkQr7zL3cM')
     }
-    async _setupShoukakuEvents() {
-        await this.settings.init();
+    _setupShoukakuEvents() {
         this.shoukaku.manager.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
         this.shoukaku.manager.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
         this.shoukaku.manager.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason ? reason : 'No reason'}`));
         this.shoukaku.manager.on('disconnected', (name, reason) => console.warn(`Lavalink ${name}: Disconnected, Reason ${reason ? reason : 'No reason'}`));
     }
-    _setupMongoose() {
+    async _setupMongoose() {
+        await this.settings.init();
         mongoose.connect("mongodb+srv://DexX:M0zila440@muridb.3gy8x.mongodb.net/database", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
