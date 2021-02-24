@@ -10,6 +10,7 @@ module.exports = class GuildCreateDelete extends Listener {
         })
     }
     async exec(guild) {
+        await this.client.settings.clear(guild.id)
         const sname = await this.client.util.firstUppercase(guild.name)
         const sreg = await this.client.util.firstUppercase(guild.region)
         const membert = guild.members.cache.size;
