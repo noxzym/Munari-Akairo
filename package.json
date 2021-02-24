@@ -32,6 +32,7 @@
     "fs": "^0.0.2",
     "glob": "^7.1.6",
     "http": "^0.0.0",
+    "lavasfy": "git+https://github.com/NezuChan/lava-spotify.git",
     "moment": "^2.29.1",
     "mongoose": "^5.11.18",
     "ms": "^2.1.3",
