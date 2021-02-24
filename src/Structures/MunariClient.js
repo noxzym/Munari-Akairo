@@ -72,6 +72,10 @@ module.exports = class MunariClient extends AkairoClient {
         mongoose.connect("mongodb+srv://DexX:M0zila440@muridb.3gy8x.mongodb.net/database", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+        }).then(() => {
+          console.log("Database Connected!")
+        }).catch((e) => {
+          console.log("refuse to connect", e)
         })
         this._EventManager();
         this.commandHandler.useListenerHandler(this.listenerHandler);

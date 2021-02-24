@@ -30,10 +30,10 @@ module.exports = class AsciiCommand extends Command {
     }
     async exec(message, { content }) {
         if (!content) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
-        if (content.length > 20) return message.channel.send(createEmbed("error", "Maximum length of text is 20")).then(x => x.delete({ timeout: 10000 }))
+        if (content.length > 20) return message.channel.send(createEmbed("error", "Maximum length of text is 20")).then(x => x.delete({ timeout: 10000 }));
         message.util.send(
             `\`\`\`\n` +
-            `${textSync(Util.cleanContent(content))}` +
+            `${textSync(Util.cleanContent(content, message))}` +
             `\n\`\`\``
         )
     }

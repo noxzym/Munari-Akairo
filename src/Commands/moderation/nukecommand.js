@@ -43,9 +43,9 @@ module.exports = class NukeCommand extends Command {
                 switch (reaction.emoji.name) {
                     case "✅":
                         reaction.users.remove(user);
-                        react.edit(createEmbed("spotify", `<a:yes:765207711423004676> | Nuke Channel **\`${channel.name}\`** successful!`)).then(x => { x.delete({ timeout: 3000 }) })
+                        react.edit(createEmbed("spotify", `<a:yes:765207711423004676> | Nuke Channel **\`${channel.name}\`** successful!`));
                         channel.clone().then(x => {
-                            message.guild.channels.cache.get(x.id).send(createEmbed("info").setAuthor(`Nothing in here, Nuke command successful!`, this.client.user.avatarURL()).setImage("https://cdn.discordapp.com/attachments/795512730940735508/801765196989071390/explosion.gif").setTimestamp().setFooter(`Commanded by: ${message.author.tag}`, this.client.user.avatarURL({ dynamic: true }))).then(x => { x.delete({ timeout: 10000 }) })
+                            this.client.channels.cache.get(x.id).send(createEmbed("info").setAuthor(`Nothing in here, Nuke command successful!`, this.client.user.avatarURL()).setImage("https://cdn.discordapp.com/attachments/795512730940735508/801765196989071390/explosion.gif").setTimestamp().setFooter(`Commanded by: ${message.author.tag}`, this.client.user.avatarURL({ dynamic: true })))
                         })
                         setTimeout(() => {
                             channel.delete(`Nuke Command Successful!`)

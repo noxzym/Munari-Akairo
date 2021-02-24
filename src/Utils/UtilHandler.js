@@ -32,7 +32,7 @@ module.exports = class UtilHandler {
     async parsemsg(Util, message, args) {
         const parse = message.content.trim().split(" ");
         const parsedata = parse[1] !== undefined && parse[1].includes("^") ? parse[1].length : 0;
-        const fetchmsg = await message.channel.messages.fetch(true).then(x => { return x.map(x => x)[parsedata] });
+        const fetchmsg = await message.channel.messages.fetch({ limit: 20 }, false, true).then(x => { return x.map(x => x)[parsedata] });
         var fetchattachment, fetchembeds, fetchmsgauthor, fetchemojimsg, mentionuser, mentionuserid, fetchavatarauthor;
         try {
             fetchattachment = fetchmsg.attachments.size !== 0 ? fetchmsg.attachments.first().url : undefined;
