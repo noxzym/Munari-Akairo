@@ -8,6 +8,9 @@ module.exports = class UtilHandler {
     }
 
     /*Function*/
+    async firstUppercase(data) {
+        return data.toLowerCase().split(" ").map(x => x.charAt(0).toUpperCase() + x.substring(1)).join(" ");
+    }
     async parseMs(value) {
         if (isNaN(value)) return;
         return prettyMilliseconds(value, { verbose: true, compact: false, secondsDecimalDigits: 0 })

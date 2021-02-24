@@ -4,11 +4,13 @@ require('../Extenders/InlineReply');
 require('../Extenders/GuildMember');
 require("../Extenders/Guild");
 
-const { AkairoClient, CommandHandler, ListenerHandler, Intents } = require("discord-akairo");
+const { AkairoClient, CommandHandler, ListenerHandler, MongooseProvider } = require("discord-akairo");
 const { Api } = require('@top-gg/sdk')
 const PlayerHandler = require('../Utils/PlayerHandler');
 const UtilHandler = require('../Utils/UtilHandler');
 const ShoukakuHandler = require("../Utils/ShoukakuHandler");
+const mongoose = require("mongoose");
+const model = require("../data/models/GuildPrefix");
 const path = require("path");
 
 module.exports = class MunariClient extends AkairoClient {
@@ -40,7 +42,12 @@ module.exports = class MunariClient extends AkairoClient {
             }
         );
         this.commandHandler = new CommandHandler(this, {
-            prefix: "m!",
+            prefix: (message) => {
+                if (message.guild) {
+                    return this.settings.get(message.guild.id, "prefix", "m!")
+                }
+                return "m!";
+            },
             allowMention: true,
             blockClient: true,
             blockBots: true,
@@ -56,11 +63,13 @@ module.exports = class MunariClient extends AkairoClient {
         this.shoukaku = new ShoukakuHandler(this);
         this.player = new PlayerHandler(this);
         this.util = new UtilHandler(this);
+        this.settings = new MongooseProvider(model);
         this.dbl = new Api('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MDExMjM1MzQ4MzU1NDg1OCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA1NDk5OTc3fQ.0S6h9gpQg77c0mLRqLC4vc4zgduENIBrPlXzkRtDF24');
         this.config = config;
         this.snipes = new Map();
     }
     async start() {
+        this._setupMongoose();
         this._setupShoukakuEvents();
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
@@ -73,11 +82,18 @@ module.exports = class MunariClient extends AkairoClient {
         return super.login("NzQwMTEyMzUzNDgzNTU0ODU4.XykRVw.tSkdflj2vTo5eOYWgAW4Hm6RltQ")
         // return super.login('NzkxMjcxMjIzMDc3MTA5ODIw.X-MuwA.XTpdWsnWaAt3Qm7qGqkQr7zL3cM')
     }
-    _setupShoukakuEvents() {
+    async _setupShoukakuEvents() {
+        await this.settings.init();
         this.shoukaku.manager.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
         this.shoukaku.manager.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
         this.shoukaku.manager.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason ? reason : 'No reason'}`));
         this.shoukaku.manager.on('disconnected', (name, reason) => console.warn(`Lavalink ${name}: Disconnected, Reason ${reason ? reason : 'No reason'}`));
+    }
+    _setupMongoose() {
+        mongoose.connect("mongodb+srv://DexX:M0zila440@muridb.3gy8x.mongodb.net/database", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
     }
     async totalGuilds() {
         return this.shard.broadcastEval("this.guilds.cache.size").then(x => x.reduce((a, b) => a + b), 0)

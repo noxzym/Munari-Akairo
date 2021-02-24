@@ -10,7 +10,7 @@ module.exports = class MessageEvent extends Listener {
         })
     }
     async exec(message) {
-        const prefix = this.client.commandHandler.prefix;
+        const prefix = this.client.settings.get(message.guild.id, "prefix", "m!");
         const embed = createEmbed("info")
             .setAuthor(`Munari Help`)
             .setThumbnail(`${this.client.user.avatarURL()}`)

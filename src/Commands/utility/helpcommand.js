@@ -27,7 +27,7 @@ module.exports = class HelpCommand extends Command {
         })
     }
     async exec(message, { command }) {
-        const prefix = this.handler.prefix;
+        const prefix = this.client.settings.get(message.guild.id, "prefix", "m!");
         const totalcmd = this.handler.categories.map(x => x.size).reduce((a, b) => b + a)
         if (command) {
             let e = createEmbed("info")

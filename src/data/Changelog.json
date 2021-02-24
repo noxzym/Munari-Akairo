@@ -1,6 +1,12 @@
 {
     "data": [
         {
+            "date": "24 February 2021",
+            "content": [
+                "- Feat: Customable prefix"
+            ]
+        },
+        {
             "date": "19 February 2021",
             "content": [
                 "- Using shoukaku for music service",
