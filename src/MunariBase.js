@@ -1,4 +1,16 @@
 require("dotenv").config()
+
+/*MongoseManager*/
+const mongoose = require("mongoose");
+mongoose.connect("mongodb+srv://DexX:M0zila440@muridb.3gy8x.mongodb.net/database", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+  console.log("Database Connected!")
+}).catch((e) => {
+  console.log("refuse to connect", e)
+})
+
 const MunariClient = require("./Structures/MunariClient");
 const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };

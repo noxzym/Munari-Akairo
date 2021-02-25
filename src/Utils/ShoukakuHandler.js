@@ -3,11 +3,11 @@ const { Shoukaku } = require('shoukaku');
 const { getPreview } = require('spotify-url-info');
 const { createEmbed } = require("./CreateEmbed");
 
-const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
-const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' };
-const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass' }
+const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "MainNode" };
+const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "SecondNode" };
+const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "BackupNode" }
 const LavalinkServer = [MuriNode, MuriNode2, MuriNode3];
-const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
+const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.0.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 module.exports = class ShoukakuHandler {
     constructor(client) {
@@ -119,8 +119,8 @@ module.exports = class ShoukakuHandler {
                 this.leave(message);
             });
             message.guild.queue.player.on("nodeDisconnect", () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
-                this.leave(message);
+                /*this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+                this.leave(message);*/
             });
         } catch (e) {
             console.log(e);

@@ -9,7 +9,6 @@ const { Api } = require('@top-gg/sdk')
 const PlayerHandler = require('../Utils/PlayerHandler');
 const UtilHandler = require('../Utils/UtilHandler');
 const ShoukakuHandler = require("../Utils/ShoukakuHandler");
-const mongoose = require("mongoose");
 const model = require("../data/models/GuildPrefix");
 const path = require("path");
 
@@ -69,14 +68,7 @@ module.exports = class MunariClient extends AkairoClient {
         this.snipes = new Map();
     }
     async start() {
-        mongoose.connect("mongodb+srv://DexX:M0zila440@muridb.3gy8x.mongodb.net/database", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        }).then(() => {
-          console.log("Database Connected!")
-        }).catch((e) => {
-          console.log("refuse to connect", e)
-        })
+        await this.settings.init();
         this._EventManager();
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
@@ -89,8 +81,7 @@ module.exports = class MunariClient extends AkairoClient {
         return super.login("NzQwMTEyMzUzNDgzNTU0ODU4.XykRVw.tSkdflj2vTo5eOYWgAW4Hm6RltQ")
         // return super.login('NzkxMjcxMjIzMDc3MTA5ODIw.X-MuwA.XTpdWsnWaAt3Qm7qGqkQr7zL3cM')
     }
-    async _EventManager() {
-        await this.settings.init();
+    _EventManager() {
         this.shoukaku.manager.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
         this.shoukaku.manager.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
         this.shoukaku.manager.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason ? reason : 'No reason'}`));
