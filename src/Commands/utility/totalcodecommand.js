@@ -48,13 +48,9 @@ module.exports = class TotalcodeCommand extends Command {
             let muah = createEmbed("info")
                 .setAuthor(`${this.client.user.username} • Totalcode`, this.client.user.avatarURL({ dynamic: true, size: 4096, format: "png" }), "https://discord.com/oauth2/authorize?client_id=740112353483554858&scope=bot&permissions=2146827639")
                 .setDescription(
-                    `**\`\`\`asciidoc\n` +
-                    `• Total Files   :: ${length.toString()} Files\n` +
-                    `• Total Lines   :: ${h.toString()} Lines\n` +
-                    `• Total Letter  :: ${i.toString()} Letters\n\n` +
-                    `File with the Highest amount of lines is ${l.split(".")[0]}\n` +
-                    `File with the Highet amount of letter is ${m.split(".")[0]}` +
-                    `\n\`\`\`**`
+                    `My owner has created about **\`${length.toString()}\`** files. Written about **\`${h.toString()}\`** lines of codes and about **\`${i.toString()}\`** letters inside me.\n\n` +
+                    `File with the highest amount of lines is **\`${l.split(".")[0]}\`** with about **\`${j.toString()}\`**\n` +
+                    `File with the highest amount of letters is **\`${m.split(".")[0]}\`** with about **\`${k}\`**`
                 )
                 .setTimestamp()
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
