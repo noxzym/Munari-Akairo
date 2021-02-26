@@ -1,11 +1,12 @@
 const { Command } = require("discord-akairo");
 const { MessageAttachment } = require('discord.js');
-const { createCanvas, loadImage } = require('canvas');
+const { createCanvas, loadImage, registerFont } = require('canvas');
 const { createEmbed } = require("../../Utils/CreateEmbed")
 const colorThief = require("colorthief")
 const onecolor = require('onecolor');
 const convert = require('parse-ms');
 const path = require('path');
+registerFont(path.join(__dirname, '..', '..', '..', 'src', 'data', 'fonts', 'NotoSansCJKjp-Bold.otf'), { family: 'CJK' });
 
 module.exports = class SpotifyCommand extends Command {
     constructor() {
@@ -118,23 +119,23 @@ module.exports = class SpotifyCommand extends Command {
         ctx.drawImage(await loadImage(logo), 50, 40, 80, 80)
 
         const colortext = await TextColor(img);
-        ctx.font = "40px Sans";
+        ctx.font = "40px CJK";
         ctx.fillStyle = colortext;
         ctx.fillText(progressrun, 70, canvas.height - 40);
 
-        ctx.font = "40px Sans";
+        ctx.font = "40px CJK";
         ctx.fillStyle = colortext;
         ctx.fillText(endprogress, canvas.width - 180, canvas.height - 40);
 
-        ctx.font = "40px Sans";
+        ctx.font = "40px CJK";
         ctx.fillStyle = colortext;
         ctx.fillText(fittingString(ctx, `Spotify • ${album}`, canvas.width - (canvas.height + 50)), 130, 90)
 
-        ctx.font = "80px Sans";
+        ctx.font = "80px CJK";
         ctx.fillStyle = colortext;
         ctx.fillText(fittingString(ctx, songname, canvas.width - (canvas.height + 50)), 70, (canvas.height / 2) - 20)
 
-        ctx.font = "50px Sans";
+        ctx.font = "50px CJK";
         ctx.fillStyle = colortext;
         ctx.fillText(fittingString(ctx, auth, canvas.width - (canvas.height + 50)), 70, (canvas.height / 2) + 50)
 

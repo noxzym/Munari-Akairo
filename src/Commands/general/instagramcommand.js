@@ -1,7 +1,8 @@
 const { Command } = require("discord-akairo");
 const { MessageAttachment } = require("discord.js");
-const { createEmbed } = require("../../Utils/CreateEmbed")
+const { createEmbed } = require("../../Utils/CreateEmbed");
 const { registerFont, createCanvas, loadImage } = require('canvas');
+const { fillTextWithTwemoji } = require('node-canvas-with-twemoji-and-discord-emoji');
 const fetch = require('node-fetch');
 const path = require('path');
 registerFont(path.join(__dirname, '..', '..', '..', 'src', 'data', 'fonts', 'nishiki.ttf'), { family: 'Sans' });
@@ -99,7 +100,8 @@ module.exports = class InstagramCommand extends Command {
 
                 ctx.font = "bold 45px Sans";
                 ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(fullname, 100, 520);
+                await fillTextWithTwemoji(ctx, fullname, 100, 520)
+                // ctx.fillText(fullname, 100, 520);
 
                 ctx.font = "40px Sans";
                 ctx.fillStyle = "#FFFFFF";
@@ -110,7 +112,8 @@ module.exports = class InstagramCommand extends Command {
 
                 ctx.font = "bold 45px Sans";
                 ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(userig, 600, 80);
+                await fillTextWithTwemoji(ctx, userig, 600, 80)
+                // ctx.fillText(userig, 600, 80);
 
                 ctx.font = "bold 50px Sans";
                 ctx.fillStyle = "#FFFFFF";
