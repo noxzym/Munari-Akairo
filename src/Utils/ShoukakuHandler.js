@@ -6,7 +6,8 @@ const { createEmbed } = require("./CreateEmbed");
 const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode', group: "MainNode" };
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode2', group: "SecondNode" };
 const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode3', group: "BackupNode" };
-const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871 , auth: "youshallnotpass", group: "minjem" }
+//const MuriNode4 = { name: "MuriNode4", host: "MuriNode4.orchitiadi.repl.co", secure: true, port: 443, auth: "murinode4", group: "BackupNode2" };
+const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871 , auth: "youshallnotpass", group: "minjem" };
 const LavalinkServer = [MuriNode, MuriNode2, MuriNode3, KagChi];
 const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.0.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
@@ -187,7 +188,7 @@ module.exports = class ShoukakuHandler {
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;
         const soundcloudregex = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
 
-        var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, this.client.config.nodes);
+        var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
         var node = this.manager.getNode();
 
         if (youtuberegex.test(query)) {
