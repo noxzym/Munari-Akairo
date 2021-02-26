@@ -9,17 +9,17 @@ module.exports = class CanvasHandler {
     async gay(img) {
         const image = await loadImage(img);
         const bg = await loadImage(join(__dirname, "..", "data", "images", "gay.png"));
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, image.width, image.height);
+        ctx.drawImage(bg, 0, 0, image.width, image.height);
 
         return canvas.toBuffer()
     }
 
     async greyscale(img) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -39,7 +39,7 @@ module.exports = class CanvasHandler {
 
     async invert(img) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -59,7 +59,7 @@ module.exports = class CanvasHandler {
 
     async sepia(img) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500)
+        const canvas = createCanvas(image.width, image.height)
         const ctx = canvas.getContext("2d")
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
 
@@ -77,7 +77,7 @@ module.exports = class CanvasHandler {
 
     async contrast(img) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500)
+        const canvas = createCanvas(image.width, image.height)
         const ctx = canvas.getContext("2d")
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
 
@@ -96,7 +96,7 @@ module.exports = class CanvasHandler {
 
     async brightness(img, amount) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -115,7 +115,7 @@ module.exports = class CanvasHandler {
 
     async darkness(img, amount) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -135,7 +135,7 @@ module.exports = class CanvasHandler {
 
     async threshold(img, amount = 50) {
         const image = await loadImage(img);
-        const canvas = createCanvas(500, 500);
+        const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 

@@ -46,7 +46,8 @@ module.exports = class StatsCommand extends Command {
             })
             let page = 0;
             let embeds = await geneembed(message, array, this.client);
-            return await message.channel.send(embeds[page]);
+            var ems = await message.channel.send(embeds[page]);
+            return await this.client.util.pagination(ems, page, embeds, message, this.client)
         }
 
         await cpuStat.usagePercent(async (err, percent) => {
@@ -89,10 +90,10 @@ module.exports = class StatsCommand extends Command {
 
 async function geneembed(message, data, client) {
     let array = [];
-    let k = 3;
-    for (let i = 0; i < data.length; i += 3) {
+    let k = 2;
+    for (let i = 0; i < data.length; i += 2) {
         const current = data.slice(i, k);
-        k += 3;
+        k += 2;
 
         const map = await current.map((x) =>
             `**\`\`\`asciidoc\n` +
@@ -108,7 +109,7 @@ async function geneembed(message, data, client) {
         let e = createEmbed("info")
             .setTitle("Lavalink Statistics")
             .setThumbnail(client.user.avatarURL({ dynamic: true, size: 4096, format: "png" }))
-            .setDescription(map)
+            .setDescription(`**I am connected with \`${client.shoukaku.manager.getNode().name}\` now**\n${map}`)
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
         array.push(e)

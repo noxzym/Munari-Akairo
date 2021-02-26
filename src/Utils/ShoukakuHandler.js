@@ -3,16 +3,14 @@ const { Shoukaku } = require('shoukaku');
 const { getPreview } = require('spotify-url-info');
 const { createEmbed } = require("./CreateEmbed");
 
-const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "MainNode" };
-const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "SecondNode" };
-const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'youshallnotpass', group: "BackupNode" }
-const LavalinkServer = [MuriNode, MuriNode2, MuriNode3];
+const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode', group: "MainNode" };
+const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode2', group: "SecondNode" };
+const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode3', group: "BackupNode" };
+const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871 , auth: "youshallnotpass", group: "minjem" }
+const LavalinkServer = [MuriNode, MuriNode2, MuriNode3, KagChi];
 const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.0.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 const filter = {
-    reset: {
-
-    },
     bass: {
         equalizer: [
             { band: 0, gain: 0.6 },
@@ -32,10 +30,10 @@ const filter = {
         ],
     },
     bassboost: {
-        equalizer: Array(6).fill(0).map((n, i) => ({ band: i, gain: 3 / 10 })),
+        equalizer: Array(6).fill(null).map((_, i) => ({ band: i, gain: .3 })),
     },
     earrape: {
-        equalizer: Array(14).fill(0).map((n, i) => ({ band: i, gain: 3 })),
+        equalizer: Array(14).fill(null).map((_, i) => ({ band: i, gain: 3 })),
     },
     pop: {
         equalizer: [
@@ -93,10 +91,10 @@ const filter = {
     },
     nightcore: {
         equalizer: [
-            { band: 1, gain: 0.3 },
-            { band: 0, gain: 0.3 },
+            { band: 1, gain: 0.1 },
+            { band: 0, gain: 0.1 },
         ],
-        timescale: { pitch: 1.2 },
+        timescale: { pitch: 1.3, speed: 1.2 },
         tremolo: { depth: 0.3, frequency: 14 },
     },
     vaporwave: {
@@ -121,7 +119,7 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.player.stopTrack();
     }
     async stop(message) {
-        this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+        this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
         message.guild.queue.player.stopTrack();
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
@@ -148,8 +146,8 @@ module.exports = class ShoukakuHandler {
 
         switch (changer) {
 
-            case "reset":
-                player.setGroupedFilters(filter.reset)
+            case "clear":
+                player.clearFilters()
                 break;
             case "bass":
                 player.setGroupedFilters(filter.bass)
@@ -180,8 +178,8 @@ module.exports = class ShoukakuHandler {
                 break;
         }
 
-        var data = await message.channel.send(`Please Wai`);
-        await delay(7000);
+        var data = await message.channel.send(`Please Wait`);
+        await delay(5000);
         return data.edit(`Successful!`)
     }
     async getSongs(query, option) {
@@ -240,7 +238,7 @@ module.exports = class ShoukakuHandler {
                 })
             });
             message.guild.queue.player.on("end", async () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
                 let songtopush = await message.guild.queue.songs.shift();
                 if (message.guild.queue.loop) {
                     message.guild.queue.songs.push(songtopush);
@@ -253,20 +251,20 @@ module.exports = class ShoukakuHandler {
                 }
             });
             message.guild.queue.player.on("closed", () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
                 this.leave(message);
             });
             message.guild.queue.player.on("error", () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
                 this.leave(message);
             });
             message.guild.queue.player.on("nodeDisconnect", () => {
-                /*this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+                /*this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
                 this.leave(message);*/
             });
         } catch (e) {
             console.log(e);
-            this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId).then(x => x.delete());
+            this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
             message.guild.queue.player.disconnect()
             message.guild.queue = null;
         }

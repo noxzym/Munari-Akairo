@@ -24,13 +24,13 @@ module.exports = class ShoobTimerEvent extends Listener {
             if (!embed.image) return;
 
             var i = 15;
-            let time = await message.channel.send(createEmbed("info").setDescription(`:green_circle:**\`| ❝ ${embed.title} ❞ Despawn in ${i}\`**`))
+            let time = await message.channel.send(createEmbed().setDescription(`:green_circle:**\`| ❝ ${embed.title} ❞ Despawn in ${i}\`**`).setColor("#78b159"))
 
             var interval = setInterval(() => {
                 i = i - 5;
-                if (i === 15) {
+                /*if (i === 15) {
                     time.edit(createEmbed().setDescription(`:green_circle:**\`| ❝ ${embed.title} ❞ Despawn in ${i}\`**`).setColor('#78b159'))
-                }
+                }*/
                 if (i === 10) {
                     time.edit(createEmbed().setDescription(`:yellow_circle:**\`| ❝ ${embed.title} ❞ Despawn in ${i}\`**`).setColor('#fdcb58'))
                 }
