@@ -39,7 +39,13 @@ module.exports = class PrefixCommand extends Command {
             return message.channel.send(createEmbed("info", `**The current prefix has been set to default**`)).then(x => x.delete({ timeout: 10000 }));
         }
 
-        if (prefix.length > 3) return message.channel.send(createEmbed("error", "**<a:no:765207855506522173> | Operation Canceled. Maximum length of prefix is 3**"))
+        if (prefix.length > 3) return message.channel.send(createEmbed("error", "**<a:no:765207855506522173> | Operation Canceled. Maximum length of prefix is 3**"));
+        if (!this.client.settings.get(message.guild.id, "prefix") && prefix === this.handler.prefix(message.guild.id)) return message.channel.send(createEmbed("info", `**The current prefix is \`${this.client.settings.get(message.guild.id, "prefix", "m!")}\`**`)).then(x => x.delete({ timeout: 10000 }));
+        if (this.client.settings.get(message.guild.id, "prefix") !== undefined && prefix === this.handler.prefix(message.guild.id)) {
+            await this.client.settings.clear(message.guild.id);
+            return message.channel.send(createEmbed("info", `**The current prefix has been set to default**`)).then(x => x.delete({ timeout: 10000 }));
+        }
+
         try {
             await this.client.settings.set(message.guild.id, "prefix", prefix);
             return message.channel.send(createEmbed("info", `**The current prefix has been set to \`${this.client.settings.get(message.guild.id, "prefix")}\`**`)).then(x => x.delete({ timeout: 10000 }));
