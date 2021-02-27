@@ -28,14 +28,14 @@ module.exports = class BanCommand extends Command {
     }
     async exec(message, { parse }) {
         const member =
-            message.guild.members.cache.get(parse) ||
+            message.guild.members.cache.get(parse.split(" ")[0]) ||
             message.mentions.members.first() ||
-            parse;
+            parse.split(" ")[0];
 
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
         if (isNaN(member)) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
-        let reason = parse.slice(1).join(" ");
+        let reason = parse.split(" ").slice(1).join(" ");
         if (!reason) {
             reason = " - ";
         }
@@ -71,8 +71,6 @@ module.exports = class BanCommand extends Command {
         if (databan.get(id) !== undefined) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. This user has been banned from this guild`)).then(msg => { msg.delete({ timeout: 10000 }) });
 
         try {
-            let e = createEmbed("error", `**You has been banned from ${message.guild.name}\nBecause: ${reason}**`);
-            this.client.users.cache.get(id) ? this.client.users.cache.get(id).send(e) : undefined;
             await message.guild.members.ban(member, { reason: reason })
             return message.channel.send(createEmbed("spotify", `<a:yes:765207711423004676> | Operation to ban **\`${tag}\`** successful!`)).then(msg => { msg.delete({ timeout: 10000 }) })
         } catch (e) {

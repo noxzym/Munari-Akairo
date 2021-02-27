@@ -27,11 +27,11 @@ module.exports = class UnbanCommand extends Command {
         })
     }
     async exec(message, { parse }) {
-        const member = parse;
+        const member = parse.split(" ")[0];
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
         if (isNaN(member)) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
-        let reason = parse
+        let reason = parse.split(" ").slice(1).join(" ");
         if (!reason) {
             reason = " - ";
         }

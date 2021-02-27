@@ -28,12 +28,12 @@ module.exports = class KickCommand extends Command {
     }
     async exec(message, { parse }) {
         const member =
-            message.guild.members.cache.get(parse) ||
+            message.guild.members.cache.get(parse.split(" ")[0]) ||
             message.mentions.members.first();
 
         if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
-        let reason = parse.slice(1).join(" ");
+        let reason = parse.split(" ").slice(1).join(" ");
         if (!reason) {
             reason = " - ";
         }
