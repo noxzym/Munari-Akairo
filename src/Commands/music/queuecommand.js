@@ -51,7 +51,7 @@ async function geneembed(message, queue) {
 
         if (queue.length === 1) {
             e.setDescription(
-                `** • [${queue[0].title}](${queue[0].url}) \`【${queue[0].requester.username}】\` • \n\n▬▬▬▬▬▬▬▬ List of Queue ▬▬▬▬▬▬▬▬**\nNo song in here? use **\`${message.client.commandHandler.prefix}play <song[title/url]>\`**`
+                `** • [${queue[0].title}](${queue[0].url}) \`【${queue[0].requester.username}】\` • \n\n▬▬▬▬▬▬▬▬ List of Queue ▬▬▬▬▬▬▬▬**\nNo song in here? use **\`${message.client.settings.get(message.guild.id, "prefix", "m!")}play <song[title/url]>\`**`
             )
         }
         embeds.push(e)

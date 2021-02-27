@@ -6,111 +6,119 @@ const { createEmbed } = require("./CreateEmbed");
 const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode', group: "MainNode" };
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode2', group: "SecondNode" };
 const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode3', group: "BackupNode" };
-const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871 , auth: "youshallnotpass", group: "minjem" }
+const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871, auth: "youshallnotpass", group: "minjem" }
 const LavalinkServer = [MuriNode, MuriNode2, MuriNode3, KagChi];
 const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.0.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 const filter = {
-    bass: {
-        equalizer: [
-            { band: 0, gain: 0.6 },
-            { band: 1, gain: 0.67 },
-            { band: 2, gain: 0.67 },
-            { band: 3, gain: 0 },
-            { band: 4, gain: -0.5 },
-            { band: 5, gain: 0.15 },
-            { band: 6, gain: -0.45 },
-            { band: 7, gain: 0.23 },
-            { band: 8, gain: 0.35 },
-            { band: 9, gain: 0.45 },
-            { band: 10, gain: 0.55 },
-            { band: 11, gain: 0.6 },
-            { band: 12, gain: 0.55 },
-            { band: 13, gain: 0 },
-        ],
-    },
-    bassboost: {
-        equalizer: Array(6).fill(null).map((_, i) => ({ band: i, gain: .3 })),
-    },
-    earrape: {
-        equalizer: Array(14).fill(null).map((_, i) => ({ band: i, gain: 3 })),
-    },
-    pop: {
-        equalizer: [
-            { band: 0, gain: 0.65 },
-            { band: 1, gain: 0.45 },
-            { band: 2, gain: -0.45 },
-            { band: 3, gain: -0.65 },
-            { band: 4, gain: -0.35 },
-            { band: 5, gain: 0.45 },
-            { band: 6, gain: 0.55 },
-            { band: 7, gain: 0.6 },
-            { band: 8, gain: 0.6 },
-            { band: 9, gain: 0.6 },
-            { band: 10, gain: 0 },
-            { band: 11, gain: 0 },
-            { band: 12, gain: 0 },
-            { band: 13, gain: 0 },
-        ],
-    },
-    soft: {
-        equalizer: [
-            { band: 0, gain: 0 },
-            { band: 1, gain: 0 },
-            { band: 2, gain: 0 },
-            { band: 3, gain: 0 },
-            { band: 4, gain: 0 },
-            { band: 5, gain: 0 },
-            { band: 6, gain: 0 },
-            { band: 7, gain: 0 },
-            { band: 8, gain: -0.25 },
-            { band: 9, gain: -0.25 },
-            { band: 10, gain: -0.25 },
-            { band: 11, gain: -0.25 },
-            { band: 12, gain: -0.25 },
-            { band: 13, gain: -0.25 },
-        ],
-    },
-    treblebass: {
-        equalizer: [
-            { band: 0, gain: 0.6 },
-            { band: 1, gain: 0.67 },
-            { band: 2, gain: 0.67 },
-            { band: 3, gain: 0 },
-            { band: 4, gain: -0.5 },
-            { band: 5, gain: 0.15 },
-            { band: 6, gain: -0.45 },
-            { band: 7, gain: 0.23 },
-            { band: 8, gain: 0.35 },
-            { band: 9, gain: 0.45 },
-            { band: 10, gain: 0.55 },
-            { band: 11, gain: 0.6 },
-            { band: 12, gain: 0.55 },
-            { band: 13, gain: 0 },
-        ],
-    },
-    nightcore: {
-        equalizer: [
-            { band: 1, gain: 0.1 },
-            { band: 0, gain: 0.1 },
-        ],
-        timescale: { pitch: 1.3, speed: 1.2 },
-        tremolo: { depth: 0.3, frequency: 14 },
-    },
-    vaporwave: {
-        equalizer: [
-            { band: 1, gain: 0.3 },
-            { band: 0, gain: 0.3 },
-        ],
-        timescale: { pitch: 0.5 },
-        tremolo: { depth: 0.3, frequency: 14 },
-    },
+    bass: [
+        { band: 0, gain: 0.6 },
+        { band: 1, gain: 0.67 },
+        { band: 2, gain: 0.67 },
+        { band: 3, gain: 0 },
+        { band: 4, gain: -0.5 },
+        { band: 5, gain: 0.15 },
+        { band: 6, gain: -0.45 },
+        { band: 7, gain: 0.23 },
+        { band: 8, gain: 0.35 },
+        { band: 9, gain: 0.45 },
+        { band: 10, gain: 0.55 },
+        { band: 11, gain: 0.6 },
+        { band: 12, gain: 0.55 },
+        { band: 13, gain: 0 },
+    ],
+    bassboost: Array(6).fill(null).map((_, i) => ({ band: i, gain: .3 })),
+    earrape: Array(14).fill(null).map((_, i) => ({ band: i, gain: 3 })),
+    pop: [
+        { band: 0, gain: 0.65 },
+        { band: 1, gain: 0.45 },
+        { band: 2, gain: -0.45 },
+        { band: 3, gain: -0.65 },
+        { band: 4, gain: -0.35 },
+        { band: 5, gain: 0.45 },
+        { band: 6, gain: 0.55 },
+        { band: 7, gain: 0.6 },
+        { band: 8, gain: 0.6 },
+        { band: 9, gain: 0.6 },
+        { band: 10, gain: 0 },
+        { band: 11, gain: 0 },
+        { band: 12, gain: 0 },
+        { band: 13, gain: 0 },
+    ],
+    soft: [
+        { band: 0, gain: 0 },
+        { band: 1, gain: 0 },
+        { band: 2, gain: 0 },
+        { band: 3, gain: 0 },
+        { band: 4, gain: 0 },
+        { band: 5, gain: 0 },
+        { band: 6, gain: 0 },
+        { band: 7, gain: 0 },
+        { band: 8, gain: -0.25 },
+        { band: 9, gain: -0.25 },
+        { band: 10, gain: -0.25 },
+        { band: 11, gain: -0.25 },
+        { band: 12, gain: -0.25 },
+        { band: 13, gain: -0.25 },
+    ],
+    treblebass: [
+        { band: 0, gain: 0.6 },
+        { band: 1, gain: 0.67 },
+        { band: 2, gain: 0.67 },
+        { band: 3, gain: 0 },
+        { band: 4, gain: -0.5 },
+        { band: 5, gain: 0.15 },
+        { band: 6, gain: -0.45 },
+        { band: 7, gain: 0.23 },
+        { band: 8, gain: 0.35 },
+        { band: 9, gain: 0.45 },
+        { band: 10, gain: 0.55 },
+        { band: 11, gain: 0.6 },
+        { band: 12, gain: 0.55 },
+        { band: 13, gain: 0 },
+    ],
+    nightcore: { pitch: 1.3, speed: 1.2 },
+    vaporwave: { pitch: 0.5 },
 };
 
 module.exports = class ShoukakuHandler {
     constructor(client) {
         this.client = client;
         this.manager = new Shoukaku(client, LavalinkServer, ShoukakuOptions);
+    }
+    async setFilter(message, changer) {
+        switch (changer) {
+            case "clear":
+                message.guild.queue.player.clearFilters()
+                break;
+            case "bass":
+                message.guild.queue.player.setEqualizer(filter.bass)
+                break;
+            case "bassboost":
+                message.guild.queue.player.setEqualizer(filter.bassboost)
+                break;
+            case "earrape":
+                message.guild.queue.player.setEqualizer(filter.earrape)
+                break;
+            case "pop":
+                message.guild.queue.player.setEqualizer(filter.pop)
+                break;
+            case "soft":
+                message.guild.queue.player.setEqualizer(filter.soft)
+                break;
+            case "treblebass":
+                message.guild.queue.player.setEqualizer(filter.treblebass)
+                break;
+            case "nightcore":
+                message.guild.queue.player.setTimescale(filter.nightcore)
+                break;
+            case "vaporwave":
+                message.guild.queue.player.setTimescale(filter.vaporwave)
+                break;
+
+            default:
+                break;
+        }
     }
     async repeat(message) {
         message.guild.queue.loop = !message.guild.queue.loop;
@@ -137,50 +145,8 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.playing = true;
     }
     async setVolume(message, volume) {
-        message.guild.queue.player.setVolume(volume/100);
+        message.guild.queue.player.setVolume(volume / 100);
         message.guild.queue.volume = volume;
-    }
-    async setFilter(message, changer) {
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        const player = message.guild.queue.player;
-
-        switch (changer) {
-
-            case "clear":
-                player.clearFilters()
-                break;
-            case "bass":
-                player.setGroupedFilters(filter.bass)
-                break;
-            case "bassboost":
-                player.setGroupedFilters(filter.bassboost)
-                break;
-            case "earrape":
-                player.setGroupedFilters(filter.earrape)
-                break;
-            case "pop":
-                player.setGroupedFilters(filter.pop)
-                break;
-            case "soft":
-                player.setGroupedFilters(filter.soft)
-                break;
-            case "treblebass":
-                player.setGroupedFilters(filter.treblebass)
-                break;
-            case "nightcore":
-                player.setGroupedFilters(filter.nightcore)
-                break;
-            case "vaporwave":
-                player.setGroupedFilters(filter.vaporwave)
-                break;
-        
-            default:
-                break;
-        }
-
-        var data = await message.channel.send(`Please Wait`);
-        await delay(5000);
-        return data.edit(`Successful!`)
     }
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
@@ -234,7 +200,7 @@ module.exports = class ShoukakuHandler {
                     .setTimestamp()
                     .setFooter(`Requested by ${message.guild.queue.songs[0].requester.username}`)
                 this.client.channels.cache.get(message.guild.queue.textChannel).send(e).then((x) => {
-                  message.guild.queue.messageId = x.id
+                    message.guild.queue.messageId = x.id
                 })
             });
             message.guild.queue.player.on("end", async () => {

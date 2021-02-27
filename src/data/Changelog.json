@@ -1,6 +1,14 @@
 {
     "data": [
         {
+            "date": "27 February 2021",
+            "content": [
+                "- Fix: Prefix COmmand",
+                "- Fix: Queue and Play command",
+                "- Fix: Kick, Ban, and Unban Command"
+            ]
+        },
+        {
             "date": "24 February 2021",
             "content": [
                 "- Feat: Customable prefix"

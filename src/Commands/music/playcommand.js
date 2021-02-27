@@ -190,10 +190,12 @@ module.exports = class PlayCommand extends Command {
                 queueConstruct.player = await player;
                 await this.client.shoukaku.play(queueConstruct.songs[0], message)
             } catch (e) {
-                console.log(e);
+                if (message.guild.me.voice.channel) {                    
+                    message.guild.queue = null;
+                    message.guild.me.voice.channel.leave();
+                }
                 message.guild.queue = null;
-                message.guild.me.voice.channel.leave();
-                message.channel.send(createEmbed("error", `Operation Canceled. Because: ${e.message}`))
+                return message.channel.send(createEmbed("error", `Operation Canceled. Because: ${e.message}`));
             }
         }
     }
