@@ -27,7 +27,7 @@ const filter = {
         { band: 12, gain: 0.55 },
         { band: 13, gain: 0 },
     ],
-    bassboost: Array(6).fill(null).map((_, i) => ({ band: i, gain: .3 })),
+    bassboost: Array(3).fill(null).map((_, i) => ({ band: i, gain: .25 })),
     earrape: Array(14).fill(null).map((_, i) => ({ band: i, gain: 3 })),
     pop: [
         { band: 0, gain: 0.65 },

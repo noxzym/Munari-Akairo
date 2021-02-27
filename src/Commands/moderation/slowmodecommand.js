@@ -30,9 +30,9 @@ module.exports = class SlowmodeCommand extends Command {
     async exec(message, { parse }) {
         const channel = message.guild.channels.cache.get(parse.split(" ")[0]) || message.mentions.channels.first();
         if (!channel) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please provide channel first`)).then(x => { x.delete({ timeout: 10000 }) });
-        if (!parse.slice(1).join(" ")) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. You need to provide the time of slowmode`)).then(x => { x.delete({ timeout: 10000 }) });
+        if (!parse.split(" ").slice(1).join(" ")) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. You need to provide the time of slowmode`)).then(x => { x.delete({ timeout: 10000 }) });
 
-        let number = (ms(parse.slice(1).join(" "))) / 1000;
+        let number = (ms(parse.split(" ").slice(1).join(" "))) / 1000;
         let nums = await this.client.util.parseMs(number * 1000);
 
         if (isNaN(number)) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please provide the correct time in seconds`)).then(x => { x.delete({ timeout: 10000 }) });
