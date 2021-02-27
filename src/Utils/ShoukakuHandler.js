@@ -153,7 +153,7 @@ module.exports = class ShoukakuHandler {
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;
         const soundcloudregex = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
 
-        var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, this.client.config.nodes);
+        var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
         var node = this.manager.getNode();
 
         if (youtuberegex.test(query)) {
