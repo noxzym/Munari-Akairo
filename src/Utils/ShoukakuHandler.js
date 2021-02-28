@@ -156,15 +156,12 @@ module.exports = class ShoukakuHandler {
         var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
         var node = this.manager.getNode();
 
-        if (youtuberegex.test(query)) {
+        if (youtuberegex.test(query) || soundcloudregex.test(query)) {
             const load = await node.rest.resolve(query);
             return load;
         } else if (spotifyregex.test(query)) {
             await lavasfy.requestToken();
             const load = lavasfy.nodes.get(this.manager.getNode().name).load(query);
-            return load;
-        } else if (soundcloudregex.test(query)) {
-            const load = await node.rest.resolve(query, "soundcloud");
             return load;
         } else if (option === "spotify") {
             if (spotifyregex.test(query)) {
