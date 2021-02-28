@@ -4,7 +4,7 @@ const { createEmbed } = require("../../Utils/CreateEmbed");
 module.exports = class NightcoreCommand extends Command {
     constructor() {
         super("NightcoreCommand", {
-            aliases: ["nightcore", "anc"],
+            aliases: ["nightcore", "nc"],
             category: "Filter",
             description: {
                 content: "Changes music filter to nightcore",
@@ -29,16 +29,17 @@ module.exports = class NightcoreCommand extends Command {
         if (message.guild.me.voice.channel !== null && channel.id !== message.guild.me.voice.channel.id) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. You must join channel **\`🔊${message.guild.me.voice.channel.name}\`**`)).then(x => x.delete({ timeout: 10000 }));
 
         if (queue.player.filters.timescale) {
-            let send = await message.channel.send(createEmbed("info", "<a:loading2:763336904108146698> | Another filter was found, replaced it"));
+            let send = await message.channel.send(createEmbed("info", "**<a:loading2:763336904108146698> | Turning off \`Nightcore\` filters**"));
+            this.client.shoukaku.setFilter(message, "clear");
+            setTimeout(() => {
+                send.edit(createEmbed("info", "**<a:yes:765207711423004676> | Successful turning off \`Nightcore\` filters**")).then(x => x.delete({ timeout: 10000 }));
+            }, 5000);
+        } else {
+            let send = await message.channel.send(createEmbed("info", "**<a:loading2:763336904108146698> | Turning on \`Nightcore\` filters**"));
             this.client.shoukaku.setFilter(message, "nightcore");
             setTimeout(() => {
-                return send.edit(createEmbed("info", "**<a:yes:765207711423004676> | Successful to Set \`Nightcore\` Filters**")).then(x => x.delete({ timeout: 10000 }));
-            }, 6000);
+                send.edit(createEmbed("info", "**<a:yes:765207711423004676> | Successful turning on \`Nightcore\` filters**")).then(x => x.delete({ timeout: 10000 }));
+            }, 5000);
         }
-        let send = await message.channel.send(createEmbed("info", "<a:loading2:763336904108146698> | Please Wait..."));
-        this.client.shoukaku.setFilter(message, "nightcore");
-        setTimeout(() => {
-            return send.edit(createEmbed("info", "**<a:yes:765207711423004676> | Successful to Set \`Nightcore\` Filters**")).then(x => x.delete({ timeout: 10000 }));
-        }, 6000);
     }
 };

@@ -142,7 +142,7 @@ module.exports = class ShoukakuHandler {
     }
     async resume(message) {
         message.guild.queue.player.setPaused(false);
-        message.guild.queue.playing = true;
+        message.guild.queue.plasying = true;
     }
     async setVolume(message, volume) {
         message.guild.queue.player.setVolume(volume / 100);
@@ -151,7 +151,7 @@ module.exports = class ShoukakuHandler {
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;
-        const soundcloudregex = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
+        const soundcloudregex = /^(https?:\/\/)?(www.)?(m\.)?soundcloud\.com\/[\w\-\.]+(\/)+[\w\-\.]+?$/;
 
         var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
         var node = this.manager.getNode();
@@ -223,10 +223,6 @@ module.exports = class ShoukakuHandler {
             message.guild.queue.player.on("error", () => {
                 this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
                 this.leave(message);
-            });
-            message.guild.queue.player.on("nodeDisconnect", () => {
-                /*this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
-                this.leave(message);*/
             });
         } catch (e) {
             console.log(e);

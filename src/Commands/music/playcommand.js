@@ -39,7 +39,7 @@ module.exports = class PlayCommand extends Command {
         if (!search) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. No query given")).then(x => x.delete({ timeout: 10000 }));
 
         const queue = message.guild.queue;
-        let data = await this.client.shoukaku.getSongs(search.replace("--search", "").replace("--find", ""));
+        let data = await this.client.shoukaku.getSongs(search.replace("--search", "").trim());
         if (!data || data.tracks.length === 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Can't get song data")).then(x => x.delete({ timeout: 10000 }));
 
         var queueConstruct = {
@@ -69,7 +69,7 @@ module.exports = class PlayCommand extends Command {
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
-                        duration: convert(trackpl[i].info.length, { colonNotation: true }),
+                        duration: convert(trackpl[i].info.length, { colonNotation: true, secondsDecimalDigits: 0 }),
                         nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
                         thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
@@ -90,7 +90,7 @@ module.exports = class PlayCommand extends Command {
                         title: Util.escapeMarkdown(trackpl[i].info.title),
                         identifier: trackpl[i].info.identifier,
                         author: trackpl[i].info.author,
-                        duration: convert(trackpl[i].info.length, { colonNotation: true }),
+                        duration: convert(trackpl[i].info.length, { colonNotation: true, secondsDecimalDigits: 0 }),
                         nowplaying: trackpl[i].info.length / 1000,
                         url: trackpl[i].info.uri,
                         thumbnail: `https://i.ytimg.com/vi/${trackpl[i].info.identifier}/hqdefault.jpg`,
@@ -123,7 +123,8 @@ module.exports = class PlayCommand extends Command {
                             message.util.edit(createEmbed("error", `<a:no:765207855506522173> | Request canceled`))
                             return embedsearch.delete({ timeout: 10000 })
                         }
-                        embedsearch.delete()
+                        message.util.edit("\u200B")
+                        embedsearch.delete({ timeout: 10000 })
                         const videoIndex = parseInt(response.first().content);
                         var video = await data.tracks[videoIndex - 1];
                     } catch (e) {
@@ -137,7 +138,7 @@ module.exports = class PlayCommand extends Command {
                         title: Util.escapeMarkdown(video.info.title),
                         identifier: video.info.identifier,
                         author: video.info.author,
-                        duration: convert(video.info.length, { colonNotation: true }),
+                        duration: convert(video.info.length, { colonNotation: true, secondsDecimalDigits: 0 }),
                         nowplaying: video.info.length / 1000,
                         url: video.info.uri,
                         thumbnail: `https://i.ytimg.com/vi/${video.info.identifier}/hqdefault.jpg`,
@@ -153,7 +154,7 @@ module.exports = class PlayCommand extends Command {
                             title: Util.escapeMarkdown(track.info.title),
                             identifier: track.info.identifier,
                             author: track.info.author,
-                            duration: convert(track.info.length, { colonNotation: true }),
+                            duration: convert(track.info.length, { colonNotation: true, secondsDecimalDigits: 0 }),
                             nowplaying: track.info.length / 1000,
                             url: track.info.uri,
                             thumbnail: `https://i.ytimg.com/vi/${track.info.identifier}/hqdefault.jpg`,
