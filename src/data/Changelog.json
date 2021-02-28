@@ -1,6 +1,12 @@
 {
     "data": [
         {
+            "date": "28 February 2021",
+            "content": [
+                "- Update: Optimizing song selection in `--search` flags"
+            ]
+        },
+        {
             "date": "27 February 2021",
             "content": [
                 "- Fix: Prefix COmmand",

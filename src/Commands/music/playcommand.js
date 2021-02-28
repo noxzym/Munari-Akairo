@@ -109,22 +109,23 @@ module.exports = class PlayCommand extends Command {
                         .setTitle(`Music Service Searching Song`)
                         .setDescription(map)
                         .setFooter(`Type 'cancel' to cancel the song request`)
-                    var embedsearch = await message.util.send(e);
+                    var embedsearch = await message.channel.send(e);
                     try {
-                        var response = await message.channel.awaitMessages(
-                            message2 => /^(?:[1-4]|5|cancel|c)$/g.test(message2.content.toLowerCase()) && message2.author.id === message.author.id, {
-                            max: 1,
-                            time: 30000,
-                            errors: ["time"]
-                        }
+                        let response;
+                        const regex = new RegExp(`^(?:[1-${map.length === 1 ? map.length : map.length - 1}]|${map.length}|cancel|c)\$`, "i");
+                        response = await message.channel.awaitMessages((x) => {
+                            return regex.test(x.content) && x.author.id === message.author.id;
+                        }, {
+                                max: 1,
+                                time: 30000,
+                                errors: ["time"]
+                            }
                         );
                         const input = response.first().content.substr(0, 6).toLowerCase()
                         if (input === 'cancel' || input === 'c') {
-                            message.util.edit(createEmbed("error", `<a:no:765207855506522173> | Request canceled`))
-                            return embedsearch.delete({ timeout: 10000 })
+                            return embedsearch.edit(createEmbed("error", `<a:no:765207855506522173> | Request canceled`)).then(x => x.delete({ timeout: 10000 }));
                         }
-                        message.util.edit("\u200B")
-                        embedsearch.delete({ timeout: 10000 })
+                        embedsearch.delete()
                         const videoIndex = parseInt(response.first().content);
                         var video = await data.tracks[videoIndex - 1];
                     } catch (e) {

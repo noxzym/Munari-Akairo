@@ -27,8 +27,7 @@ const filter = {
         { band: 12, gain: 0.55 },
         { band: 13, gain: 0 },
     ],
-    bassboost: Array(3).fill(null).map((_, i) => ({ band: i, gain: .25 })),
-    earrape: Array(14).fill(null).map((_, i) => ({ band: i, gain: 3 })),
+    bassboost: Array(4).fill(null).map((_, i) => ({ band: i, gain: .25 })),
     pop: [
         { band: 0, gain: 0.65 },
         { band: 1, gain: 0.45 },
@@ -77,8 +76,11 @@ const filter = {
         { band: 12, gain: 0.55 },
         { band: 13, gain: 0 },
     ],
+    tremolo: { frequency: 2.0, depth: 0.5 },
     nightcore: { pitch: 1.3, speed: 1.2 },
+    vibrato: { frequency: 2.0, depth: 0.5 },
     vaporwave: { pitch: 0.5 },
+    eightd: { rotationHz: 0.2 }
 };
 
 module.exports = class ShoukakuHandler {
@@ -97,9 +99,6 @@ module.exports = class ShoukakuHandler {
             case "bassboost":
                 message.guild.queue.player.setEqualizer(filter.bassboost)
                 break;
-            case "earrape":
-                message.guild.queue.player.setEqualizer(filter.earrape)
-                break;
             case "pop":
                 message.guild.queue.player.setEqualizer(filter.pop)
                 break;
@@ -115,7 +114,15 @@ module.exports = class ShoukakuHandler {
             case "vaporwave":
                 message.guild.queue.player.setTimescale(filter.vaporwave)
                 break;
-
+            case "tremolo":
+                message.guild.player.setRotation(filter.tremolo)
+                break;
+            case "vibrato":
+                message.guild.player.setRotation(filter.vibrato)
+                break;
+            case "8d":
+                message.guild.player.setRotation(filter.eightd)
+                break;
             default:
                 break;
         }
