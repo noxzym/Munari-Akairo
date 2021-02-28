@@ -151,12 +151,15 @@ module.exports = class ShoukakuHandler {
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;
-        const soundcloudregex = /^(https?:\/\/)?(www.)?(m\.)?soundcloud\.com\/[\w\-\.]+(\/)+[\w\-\.]+?$/;
+
+        const scregex = /^https?:\/\/(soundcloud\.com)\/(.*)$/;
+        const scmregex = /^(https?:\/\/)?(www.)?(m\.)?soundcloud\.com\/[\w\-\.]+(\/)+[\w\-\.]+?$/;
+        const scm2regex = /^https?:\/\/(soundcloud\.app\.goo\.gl)\/(.*)$/;
 
         var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
         var node = this.manager.getNode();
 
-        if (youtuberegex.test(query) || soundcloudregex.test(query)) {
+        if (youtuberegex.test(query) || (scregex.test(query) || scmregex.test(query) || scm2regex.test(query))) {
             const load = await node.rest.resolve(query);
             return load;
         } else if (spotifyregex.test(query)) {
