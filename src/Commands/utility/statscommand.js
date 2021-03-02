@@ -80,6 +80,12 @@ module.exports = class StatsCommand extends Command {
                     `• Processor      :: ${os.cpus().map(i => `${i.model}`)[0]}\n` +
                     `\`\`\``
                 )
+                .addField(
+                    '\u200b',
+                    `**Lavalink Statistics: \`${this.client.settings.get(message.guild.id, "prefix", "m!")}stats lavalink\`\n` +
+                    `Quick Links:【[Vote me](https://top.gg/bot/740112353483554858/vote)】 • ` + 
+                    `【[Invite me](https://discord.com/oauth2/authorize?client_id=740112353483554858&scope=bot&permissions=2146827639)】**`
+                )
                 .setTimestamp()
                 .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }));
 
@@ -109,7 +115,10 @@ async function geneembed(message, data, client) {
         let e = createEmbed("info")
             .setTitle("Lavalink Statistics")
             .setThumbnail(client.user.avatarURL({ dynamic: true, size: 4096, format: "png" }))
-            .setDescription(`**I am connected with \`${client.shoukaku.manager.getNode().name}\` now**\n${map}`)
+            .setDescription(
+                `${map}\n\n` +
+                `**I use more nodes to avoid ratelimit for user convenience**`
+            )
             .setTimestamp()
             .setFooter(`Commanded by ${message.author.tag}`, message.author.avatarURL({ dynamic: true, size: 4096, format: "png" }))
         array.push(e)

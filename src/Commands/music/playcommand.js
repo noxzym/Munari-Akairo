@@ -187,7 +187,8 @@ module.exports = class PlayCommand extends Command {
         if (!queue) {
             try {
                 message.guild.queue = queueConstruct;
-                const node = await this.client.shoukaku.manager.getNode();
+                const getnode = await this.client.shoukaku.getRandomNode();
+                const node = await this.client.shoukaku.manager.nodes.get(getnode);
                 const player = await node.joinVoiceChannel({ deaf: true, guildID: message.guild.id, voiceChannelID: message.member.voice.channel.id });
                 queueConstruct.player = await player;
                 await this.client.shoukaku.play(queueConstruct.songs[0], message)

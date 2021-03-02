@@ -155,6 +155,21 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.player.setVolume(volume / 100);
         message.guild.queue.volume = volume;
     }
+    async getRandomIndex(array) {
+        return Math.floor(Math.random() * array.length)
+    }
+    async getRandomNode() {
+        const firstIndex = Math.floor(Math.random() * this.client.config.nodes.length);
+        const node = this.client.shoukaku.manager.nodes.get(this.client.config.nodes[firstIndex].name);
+        if (node.state === "CONNECTED") {
+            return this.client.config.nodes[firstIndex].name;
+        };
+        let index = firstIndex;
+        while (index === firstIndex || !this.client.shoukaku.manager.nodes.get(this.client.config.nodes[index].name).state === "CONNECTED") {
+            index = this.getRandomIndex(this.client.config.nodes);
+        }
+        return this.client.config.nodes[firstIndex].name;
+    }
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
         const spotifyregex = /^(?:https:\/\/open\.spotify\.com\/(?:user\/[A-Za-z0-9]+\/)?|spotify:)(album|playlist|track)(?:[/:])([A-Za-z0-9]+).*$/;
@@ -164,7 +179,8 @@ module.exports = class ShoukakuHandler {
         const scm2regex = /^https?:\/\/(soundcloud\.app\.goo\.gl)\/(.*)$/;
 
         var lavasfy = new LavasfyClient({ clientID: this.client.config.spcid, clientSecret: this.client.config.spcs, filterAudioOnlyResult: false }, LavalinkServer);
-        var node = this.manager.getNode();
+        const getnode = await this.getRandomNode()
+        var node = this.manager.nodes.get(getnode);
 
         if (youtuberegex.test(query) || (scregex.test(query) || scmregex.test(query) || scm2regex.test(query))) {
             const load = await node.rest.resolve(query);
