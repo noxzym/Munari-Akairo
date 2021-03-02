@@ -19,7 +19,7 @@
     "@top-gg/sdk": "^3.0.7",
     "alexflipnote.js": "^2.3.6",
     "axios": "^0.21.1",
-    "canvas": "^2.6.1",
+    "canvas": "^2.7.0",
     "colorthief": "^2.3.2",
     "cpu-stat": "^2.0.1",
     "discord-akairo": "^8.1.0",
