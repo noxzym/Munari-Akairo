@@ -27,12 +27,13 @@ module.exports = class BanCommand extends Command {
         })
     }
     async exec(message, { parse }) {
+        if (!parse) return message.channel.send(createEmbed("info", "**Please mention member who want to ban**")).then(msg => { msg.delete({ timeout: 10000 }) })
         const member =
             message.guild.members.cache.get(parse.split(" ")[0]) ||
             message.mentions.members.first() ||
             parse.split(" ")[0];
 
-        if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
+        if (!member) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please mention members first`)).then(msg => { msg.delete({ timeout: 10000 }) })
         if (isNaN(member)) return message.channel.send(createEmbed("error", `<a:no:765207855506522173> | Operation Canceled. Please input the correct data`)).then(msg => { msg.delete({ timeout: 10000 }) })
 
         let reason = parse.split(" ").slice(1).join(" ");

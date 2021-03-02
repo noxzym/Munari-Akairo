@@ -1,6 +1,12 @@
 {
     "data": [
         {
+            "date": "02 February 2921",
+            "content": [
+                "- Fix(bug): ban, kick, unban command"
+            ]
+        },
+        {
             "date": "28 February 2021",
             "content": [
                 "- Update: Optimizing song selection in `--search` flags"
