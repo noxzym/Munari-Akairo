@@ -16,10 +16,10 @@
     "lint:fix": "eslint . --ignore-path .gitignore --ext .js --fix"
   },
   "dependencies": {
-    "@top-gg/sdk": "^3.0.7",
+    "@top-gg/sdk": "^3.0.8",
     "alexflipnote.js": "^2.3.6",
     "axios": "^0.21.1",
-    "canvas": "^2.6.1",
+    "canvas": "^2.7.0",
     "colorthief": "^2.3.2",
     "cpu-stat": "^2.0.1",
     "discord-akairo": "^8.1.0",
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.0",
-    "eslint": "^7.20.0"
+    "eslint": "^7.21.0"
   },
   "engines": {
     "node": "14.x"
