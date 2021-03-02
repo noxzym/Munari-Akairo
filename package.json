@@ -16,7 +16,7 @@
     "lint:fix": "eslint . --ignore-path .gitignore --ext .js --fix"
   },
   "dependencies": {
-    "@top-gg/sdk": "^3.0.7",
+    "@top-gg/sdk": "^3.0.8",
     "alexflipnote.js": "^2.3.6",
     "axios": "^0.21.1",
     "canvas": "^2.6.1",
