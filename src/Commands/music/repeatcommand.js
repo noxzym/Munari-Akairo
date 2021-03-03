@@ -46,15 +46,16 @@ module.exports = class RepeatCommand extends Command {
             off: 0,
             0: 0
         };
+
         const types = ["Disable", "Only this track", "Queue"];
         const emoji = ["▶", "🔂", "🔁"];
-        if (!type) return message.channel.send(createEmbed(
-            "info",
-            `**${emoji[queue._repeat]} | Current repeat mode is \`${types[queue._repeat]}\`**`
-        )).then(x => x.delete({ timeout: 10000 }));
 
+        if (!type) {
+            await this.client.shoukaku.setRepeat(message, mode[2]);
+            return message.channel.send(createEmbed("info", `**${emoji[queue._repeat]} | Repeat mode has been set to \`Queue\`**`)).then(x => x.delete({ timeout: 10000 }));
+        }
         if (Object.keys(mode).includes(type)) {
-            await this.client.shoukaku.repeat(message, type);
+            await this.client.shoukaku.setRepeat(message, type);
             message.channel.send(createEmbed(
                 "info", 
                 `**${emoji[queue._repeat]} | Loop mode has been set to \`${types[queue._repeat]}\`**`

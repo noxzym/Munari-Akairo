@@ -134,7 +134,7 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.player.stopTrack();
     }
     async stop(message) {
-        message.guild.qyeye.testChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
+        message.guild.qyeye.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
         message.guild.queue.player.stopTrack();
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
