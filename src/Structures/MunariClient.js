@@ -1,8 +1,7 @@
 
 require('dotenv').config();
-require('../Extenders/InlineReply');
-require('../Extenders/GuildMember');
-require("../Extenders/Guild");
+require('./InlineReply');
+require("./Guild");
 
 const { AkairoClient, CommandHandler, ListenerHandler, MongooseProvider } = require("discord-akairo");
 const { Api } = require('@top-gg/sdk')

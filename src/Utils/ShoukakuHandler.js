@@ -8,7 +8,7 @@ const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", sec
 const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode3', group: "BackupNode" };
 const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871, auth: "youshallnotpass", group: "minjem" }
 const LavalinkServer = [MuriNode, MuriNode2, MuriNode3, KagChi];
-const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.0.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
+const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.6.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 const filter = {
     bass: [
@@ -127,14 +127,14 @@ module.exports = class ShoukakuHandler {
                 break;
         }
     }
-    async repeat(message) {
-        message.guild.queue.loop = !message.guild.queue.loop;
+    async setRepeat(message, value) {
+        message.guild.queue._repeat = Number(value);
     }
     async skip(message) {
         message.guild.queue.player.stopTrack();
     }
     async stop(message) {
-        this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
+        message.guild.qyeye.testChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
         message.guild.queue.player.stopTrack();
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
@@ -145,11 +145,11 @@ module.exports = class ShoukakuHandler {
     }
     async pause(message) {
         message.guild.queue.player.setPaused(true);
-        message.guild.queue.playing = false;
+        message.guild.queue._playing = false;
     }
     async resume(message) {
         message.guild.queue.player.setPaused(false);
-        message.guild.queue.plasying = true;
+        message.guild.queue._playing = true;
     }
     async setVolume(message, volume) {
         message.guild.queue.player.setVolume(volume / 100);
@@ -159,16 +159,16 @@ module.exports = class ShoukakuHandler {
         return Math.floor(Math.random() * array.length)
     }
     async getRandomNode() {
-        const firstIndex = Math.floor(Math.random() * this.client.config.nodes.length);
-        const node = this.client.shoukaku.manager.nodes.get(this.client.config.nodes[firstIndex].name);
+        const firstIndex = Math.floor(Math.random() * LavalinkServer.length);
+        const node = this.client.shoukaku.manager.nodes.get(LavalinkServer[firstIndex].name);
         if (node.state === "CONNECTED") {
-            return this.client.config.nodes[firstIndex].name;
-        };
-        let index = firstIndex;
-        while (index === firstIndex || !this.client.shoukaku.manager.nodes.get(this.client.config.nodes[index].name).state === "CONNECTED") {
-            index = this.getRandomIndex(this.client.config.nodes);
+            return LavalinkServer[firstIndex].name;
         }
-        return this.client.config.nodes[firstIndex].name;
+        let index = firstIndex;
+        while (index === firstIndex || !this.client.shoukaku.manager.nodes.get(LavalinkServer[index].name).state === "CONNECTED") {
+            index = this.getRandomIndex(LavalinkServer);
+        }
+        return LavalinkServer[firstIndex].name;
     }
     async getSongs(query, option) {
         const youtuberegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
@@ -222,34 +222,37 @@ module.exports = class ShoukakuHandler {
                     .setThumbnail(message.guild.queue.songs[0].thumbnail)
                     .setTimestamp()
                     .setFooter(`Requested by ${message.guild.queue.songs[0].requester.username}`)
-                this.client.channels.cache.get(message.guild.queue.textChannel).send(e).then((x) => {
-                    message.guild.queue.messageId = x.id
+                message.guild.queue.textChannel.send(e).then((x) => {
+                    message.guild.queue._lastMusicMessageID = x.id
                 })
             });
             message.guild.queue.player.on("end", async () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
+                message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
+                if (message.guild.queue._repeat === 1) {
+                    return message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true })
+                }
                 let songtopush = await message.guild.queue.songs.shift();
-                if (message.guild.queue.loop) {
+                if (message.guild.queue._repeat === 2) {
                     message.guild.queue.songs.push(songtopush);
                     message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true });
                 } else if (message.guild.queue.songs.length === 0) {
-                    await this.client.channels.cache.get(message.guild.queue.textChannel).send(createEmbed("info", "**Request more song to keep me in the voice channel**")).then(msg => { msg.delete({ timeout: 10000 }); })
+                    await message.guild.queue.textChannel.send(createEmbed("info", "**Request more song to keep me in the voice channel**")).then(msg => { msg.delete({ timeout: 10000 }); })
                     return this.leave(message);
                 } else {
                     message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true });
                 }
             });
             message.guild.queue.player.on("closed", () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
+                message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
                 this.leave(message);
             });
             message.guild.queue.player.on("error", () => {
-                this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
+                message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
                 this.leave(message);
             });
         } catch (e) {
-            console.log(e);
-            this.client.channels.cache.get(message.guild.queue.textChannel).messages.fetch(message.guild.queue.messageId, false, true).then(x => x.delete());
+            console.log(e.stack);
+            message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
             message.guild.queue.player.disconnect()
             message.guild.queue = null;
         }

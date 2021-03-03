@@ -2,6 +2,7 @@ const { Command } = require("discord-akairo");
 const { createEmbed } = require("../../Utils/CreateEmbed")
 const { Util } = require("discord.js");
 const convert = require("pretty-ms");
+const serverQueue = require("../../Structures/ServerQueue");
 
 module.exports = class PlayCommand extends Command {
     constructor() {
@@ -15,6 +16,7 @@ module.exports = class PlayCommand extends Command {
             args: [
                 {
                     id: "search",
+                    type: "string",
                     match: "content"
                 },
                 {
@@ -42,17 +44,7 @@ module.exports = class PlayCommand extends Command {
         let data = await this.client.shoukaku.getSongs(search.replace("--search", "").trim());
         if (!data || data.tracks.length === 0) return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Can't get song data")).then(x => x.delete({ timeout: 10000 }));
 
-        var queueConstruct = {
-            textChannel: message.channel.id,
-            voiceChannel: channel.id,
-            guildId: message.guild.id,
-            songs: [],
-            connection: null,
-            loop: false,
-            volume: 100,
-            playing: true,
-            messageId: null
-        };
+        var queueConstruct = new serverQueue(message.channel, channel);
 
         if (data.type === "PLAYLIST") {
             const trackpl = await data.tracks.slice(0, 50);
