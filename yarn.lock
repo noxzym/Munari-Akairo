@@ -105,10 +105,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@top-gg/sdk@^3.0.8":
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/@top-gg/sdk/-/sdk-3.0.8.tgz#da552e73d99feafc856c3a4922934097954c2d85"
-  integrity sha512-oZ4mw8LpD7k3jt1bL/+MngOVO8Qer9mbcGhlmROqA/bl8CpYdmhiKbkgtGt/uL8yhehTwGC5wzhtEZMbjC+CaA==
+"@top-gg/sdk@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@top-gg/sdk/-/sdk-3.0.9.tgz#e42b6d1784d0105de8cd95f16ba06650afe26b6b"
+  integrity sha512-AskJQk6+89lIGu6UzjsDxXe4wRuc9lbpXwftIzzng2+kB8R3ZzN7hwa1nC/AacLG07m0gbBwQBWlE5IgexA/kg==
   dependencies:
     node-fetch "^2.6.1"
     raw-body "^2.4.1"
