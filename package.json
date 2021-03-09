@@ -61,7 +61,7 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.0",
+    "@mapbox/node-pre-gyp": "^1.0.1",
     "eslint": "^7.21.0"
   },
   "engines": {
