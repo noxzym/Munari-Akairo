@@ -50,6 +50,7 @@ module.exports = class InstagramCommand extends Command {
                     results = await fetch(`https://instagram.com/${username}/?__a=1`, { headers: { cookie: `sessionid=${this.client.config.sessionid}` } }).then(x => x.json())
                 }
             } catch (e) {
+                console.log(e.message)
                 return message.channel.send(createEmbed("error", "<a:no:765207855506522173> | Operation Canceled. Cannot find that username or the service unavailable")).then(x => { x.delete({ timeout: 10000 }) })
             }
 

@@ -6,8 +6,7 @@ const { createEmbed } = require("./CreateEmbed");
 const MuriNode = { name: "MuriNode", host: "MuriNode.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode', group: "MainNode" };
 const MuriNode2 = { name: "MuriNode2", host: "MuriNode2.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode2', group: "SecondNode" };
 const MuriNode3 = { name: "MuriNode3", host: "MuriNode3.orchitiadi.repl.co", secure: true, port: 443, auth: 'murinode3', group: "BackupNode" };
-const KagChi = { name: "KagChiNode", host: "eu2.bombhost.cloud", secure: false, port: 20871, auth: "youshallnotpass", group: "minjem" }
-const LavalinkServer = [MuriNode, MuriNode2, MuriNode3, KagChi];
+const LavalinkServer = [MuriNode, MuriNode2, MuriNode3];
 const ShoukakuOptions = { moveOnDisconnect: true, resumable: true, userAgent: "Munari Rose#6371 V2.6.0", resumableTimeout: 15000, reconnectTries: 2, restTimeout: 10000 };
 
 const filter = {
@@ -134,7 +133,7 @@ module.exports = class ShoukakuHandler {
         message.guild.queue.player.stopTrack();
     }
     async stop(message) {
-        message.guild.qyeye.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
+        message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
         message.guild.queue.player.stopTrack();
         message.guild.queue.player.disconnect();
         message.guild.queue = null;
@@ -160,12 +159,12 @@ module.exports = class ShoukakuHandler {
     }
     async getRandomNode() {
         const firstIndex = Math.floor(Math.random() * LavalinkServer.length);
-        const node = this.client.shoukaku.manager.nodes.get(LavalinkServer[firstIndex].name);
+        const node = this.manager.nodes.get(LavalinkServer[firstIndex].name);
         if (node.state === "CONNECTED") {
             return LavalinkServer[firstIndex].name;
         }
         let index = firstIndex;
-        while (index === firstIndex || !this.client.shoukaku.manager.nodes.get(LavalinkServer[index].name).state === "CONNECTED") {
+        while (index === firstIndex || !this.manager.nodes.get(LavalinkServer[index].name).state === "CONNECTED") {
             index = this.getRandomIndex(LavalinkServer);
         }
         return LavalinkServer[firstIndex].name;
@@ -242,7 +241,8 @@ module.exports = class ShoukakuHandler {
                     message.guild.queue.player.playTrack(message.guild.queue.songs[0].track, { noReplace: true });
                 }
             });
-            message.guild.queue.player.on("closed", () => {
+            message.guild.queue.player.on("closed", (reason) => {
+                console.log(reason.reason === "Disconnected.")
                 message.guild.queue.textChannel.messages.fetch(message.guild.queue._lastMusicMessageID, false, true).then(x => x.delete());
                 this.leave(message);
             });
