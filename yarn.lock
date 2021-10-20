@@ -195,10 +195,10 @@ ajv@^7.0.2:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alexflipnote.js@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/alexflipnote.js/-/alexflipnote.js-2.4.0.tgz#3657362f35f58597f7eeceb3141e6676c3b127d2"
-  integrity sha512-495b6ZaokefqNOBTGPQf7phTJ6Mk1ieGxldryYv5codZ1gMo8cs4AKNq3TSxGiaFutz5O6MQ0ZfpHQLq9LQSoQ==
+alexflipnote.js@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/alexflipnote.js/-/alexflipnote.js-2.4.1.tgz#3a4b43a136a3044c179ad786a80bd7a2aa00ee07"
+  integrity sha512-8zETi3tkdQlwsHbksRUFm1X3rSQ9JRQyr8H9CL7TqKxEx/ZHGlgcRyifV5W800dbFDe8bX8atDELbndien8jzg==
   dependencies:
     node-fetch "^2.6.1"
 
