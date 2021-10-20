@@ -3052,10 +3052,10 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yt-search@^2.7.3:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/yt-search/-/yt-search-2.7.3.tgz#2fbd0bcf598b24ebe1cd635cd9357b1475f46b54"
-  integrity sha512-A4IEoGSJ+RhWCYsdOt4cWxi0NZZPY71yGtTH1sxWBIVkiZ8PVMyLAODzF/qnRIdKydviIRGCcQZZhzjB9AWCbQ==
+yt-search@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/yt-search/-/yt-search-2.7.4.tgz#63919e55854cb98ee72d261d6efd29edafe4e88d"
+  integrity sha512-Ecv93yYKTQ/LmB0r4Ry+abDrcxlftFl9cs0ZXY50IE+UJVBtI7WcxgPPme/MiJYrAAZHLkduqLdZT4FaL58HZQ==
   dependencies:
     async.parallellimit "~0.5.2"
     boolstring "~1.0.2"
